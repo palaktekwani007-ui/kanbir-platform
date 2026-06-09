@@ -1,0 +1,1145 @@
+﻿---
+// Home Page - Kanbir Solutions
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kanbir Solutions — premium strategic finance, ERP transformation, business advisory and R&D expertise." />
+  <title>Kanbir Solutions | Financial Intelligence for Modern Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-dark: #020617;
+      --navy: #0f172a;
+      --blue: #2563eb;
+      --blue-2: #3b82f6;
+      --blue-3: #60a5fa;
+      --blue-soft: #93c5fd;
+      --sky: #38bdf8;
+      --teal: #06b6d4;
+      --surface: rgba(255,255,255,0.08);
+      --surface-strong: rgba(255,255,255,0.12);
+      --surface-soft: rgba(255,255,255,0.05);
+      --text: #f8fbff;
+      --muted: #cbd5e1;
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 48px 120px rgba(0,0,0,0.35);
+      --radius: 28px;
+      --radius-sm: 16px;
+      --transition: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      --max-width: 1280px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top left, rgba(56,178,255,0.16), transparent 20%), radial-gradient(circle at 20% 5%, rgba(96,165,250,0.08), transparent 18%), var(--bg-dark);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 85% 10%, rgba(96,165,250,0.16), transparent 22%), radial-gradient(circle at 10% 90%, rgba(56,178,255,0.12), transparent 18%);
+      opacity: 0.7;
+    }
+
+    .progress-shell {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      z-index: 60;
+      overflow: hidden;
+    }
+    .progress-shell span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-2), var(--sky));
+      transform-origin: left center;
+      transition: width 0.15s ease-out;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.98);
+      border-bottom: 1px solid rgba(2,6,23,0.06);
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .navbar.sticky { background: rgba(255,255,255,0.98); box-shadow: 0 6px 20px rgba(2,6,23,0.04); }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 1rem;
+      text-transform: none;
+      color: #071424;
+    }
+    .brand img { display:block; height:84px; width:auto; transition: transform 0.28s ease, filter 0.28s ease; }
+    .brand img:hover { transform: scale(1.06); filter: drop-shadow(0 8px 28px rgba(6,30,55,0.12)); }
+    .nav-links a { position: relative; }
+    .nav-links a::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%) scaleX(0); bottom: -6px; width: 60%; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--sky)); transition: transform 0.28s ease; }
+    .nav-links a:hover::after { transform: translateX(-50%) scaleX(1); }
+    .sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-left: 2rem;
+    }
+    .nav-links a {
+      color: rgba(7,20,36,0.72);
+      font-size: 0.94rem;
+      font-weight: 600;
+      transition: color var(--transition);
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    .nav-links a:hover { color: #0b2440; background: rgba(6,28,50,0.04); }
+
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-left: auto;
+    }
+    .btn-ghost {
+      border: 1px solid rgba(7,20,36,0.08);
+      color: rgba(7,20,36,0.92);
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: transparent;
+      transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+    }
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(7,20,36,0.04);
+      box-shadow: 0 8px 22px rgba(2,6,23,0.06);
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      color: #020617;
+      background: linear-gradient(135deg, #93c5fd, #38bdf8, #06b6d4);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(56,178,255,0.24);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 120px 32px 80px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: -12%;
+      right: -20%;
+      background: radial-gradient(circle, rgba(56,178,255,0.22), transparent 45%);
+      filter: blur(72px);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      bottom: 8%;
+      left: -10%;
+      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 45%);
+      filter: blur(56px);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 30px;
+      align-content: center;
+      z-index: 2;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--sky);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow span { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:999px; background: rgba(255,255,255,0.1); }
+
+    .hero-title {
+      font-size: clamp(4rem, 8vw, 6.4rem);
+      line-height: 0.92;
+      font-weight: 800;
+      letter-spacing: -0.08em;
+      max-width: 740px;
+      text-transform: none;
+      margin: 0;
+    }
+    .hero-title .gradient {
+      background: linear-gradient(90deg, #93c5fd, #60a5fa, #38bdf8, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: text-wave 5s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .hero-copy p {
+      max-width: 660px;
+      font-size: 1.125rem;
+      line-height: 1.85;
+      color: rgba(248,250,252,0.88);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .hero-notes {
+      display: grid;
+      gap: 18px;
+      padding: 24px 0 0;
+      opacity: 0.92;
+    }
+    .hero-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.98rem;
+    }
+    .hero-note strong { color: #fff; }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      gap: 24px;
+      align-items: end;
+      justify-items: end;
+      min-height: 680px;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(30deg, rgba(255,255,255,0.06) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.06) 87.5%),
+        linear-gradient(150deg, rgba(255,255,255,0.06) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.06) 87.5%);
+      background-size: 90px 156px;
+      opacity: 0.35;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.1), transparent 18%),
+        radial-gradient(circle at 90% 20%, rgba(255,255,255,0.05), transparent 16%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.06), transparent 20%),
+        linear-gradient(30deg, rgba(255,255,255,0.04) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 75%),
+        linear-gradient(60deg, rgba(255,255,255,0.04) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 75%);
+      background-size: 130px 130px, 130px 130px, 140px 140px, 80px 80px, 80px 80px;
+      opacity: 0.22;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+
+    .hero-visual .glass-panel {
+      position: absolute;
+      width: 280px;
+      padding: 22px 24px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+      color: #fff;
+    }
+    .glass-panel h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+    .glass-panel p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+    .glass-panel strong {
+      display:block;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .dashboard-panel {
+      position: absolute;
+      border-radius: 30px;
+      padding: 24px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.18);
+      display: grid;
+      gap: 18px;
+      color: #fff;
+      min-width: 320px;
+    }
+    .dashboard-label {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 700;
+    }
+    .dashboard-graph {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      min-height: 120px;
+      padding-top: 10px;
+    }
+    .graph-bar {
+      flex: 1;
+      background: linear-gradient(180deg, rgba(56,178,255,0.95), rgba(6,182,212,0.4));
+      border-radius: 999px;
+      height: var(--h);
+      min-height: 20px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .dashboard-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .dashboard-kpis div {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.88rem;
+      display: grid;
+      gap: 6px;
+    }
+    .dashboard-kpis strong {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .floating-card {
+      position: absolute;
+      width: 320px;
+      min-height: 180px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.18);
+      padding: 28px 26px;
+      display: grid;
+      gap: 14px;
+      transform: translateZ(0);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .floating-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 45%, rgba(255,255,255,0.04) 55%, rgba(255,255,255,0.12) 100%);
+      opacity: 0.4;
+      pointer-events: none;
+      transform: translateX(-100%);
+      animation: shimmer 4.2s ease-in-out infinite;
+    }
+    .floating-card:hover {
+      transform: translateY(-12px) scale(1.01);
+      box-shadow: 0 50px 120px rgba(0,0,0,0.24);
+    }
+    .floating-card .label {
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.68);
+      font-weight: 600;
+    }
+    .floating-card .value {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: #fff;
+    }
+    .floating-card .caption {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .float-1 { top: 10%; right: 0; animation: float 8s ease-in-out infinite alternate; }
+    .float-2 { bottom: 16%; left: 8%; animation: float 7.2s ease-in-out infinite alternate; }
+    .float-3 { top: 44%; right: 10%; animation: float 6.4s ease-in-out infinite alternate; }
+
+    .feature-strip {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 32px 100px;
+      margin-top: -120px;
+      z-index: 1;
+    }
+    .feature-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0) 55%);
+      pointer-events: none;
+    }
+
+    .client-ribbon {
+      width: 100%;
+      overflow: hidden;
+    }
+    .ribbon-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      gap: 4rem;
+      animation: marquee 24s linear infinite;
+      align-items: center;
+      padding: 18px 0;
+    }
+    .ribbon-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      min-width: 120px;
+    }
+
+    .section {
+      padding: 120px 32px 120px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .section:nth-of-type(even) { background: rgba(255,255,255,0.02); }
+    .section-head {
+      display: grid;
+      gap: 18px;
+      max-width: 720px;
+      margin-bottom: 48px;
+    }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sky);
+    }
+    .section-tag::before {
+      content: '';
+      width: 36px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--sky));
+    }
+    .section-title {
+      font-size: clamp(2.75rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+      margin: 0;
+      max-width: 850px;
+    }
+    .section-copy {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      padding: 34px;
+      min-height: 320px;
+      display: grid;
+      gap: 18px;
+      transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+      box-shadow: 0 16px 60px rgba(0,0,0,0.18);
+      animation: pulse 6s ease-in-out infinite alternate;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.12) 18%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.04) 100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.35s ease;
+      transform: translateX(-100%);
+    }
+    .feature-card .feature-loading {
+      width: min(100%, 140px);
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card .feature-loading::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: translateX(-110%);
+      animation: loading-sweep 1.8s infinite;
+    }
+    .feature-card:hover::after {
+      opacity: 1;
+      transform: translateX(20%);
+    }
+    .feature-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.24);
+    }
+    .feature-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.24);
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(56,178,255,0.14), transparent 40%), radial-gradient(circle at 80% 70%, rgba(6,182,212,0.16), transparent 35%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+    .feature-card > * { position: relative; z-index: 1; }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+      color: #fff;
+      font-size: 1.3rem;
+    }
+    .feature-title {
+      font-size: 1.45rem;
+      line-height: 1.2;
+      margin: 0;
+    }
+    .feature-description {
+      color: rgba(255,255,255,0.75);
+      line-height: 1.85;
+    }
+    .feature-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.86rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .accounting-panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 30px;
+      padding: 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.16);
+      display: grid;
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+    .accounting-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+    .accounting-row strong {
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+    .accounting-chart {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: end;
+      height: 130px;
+    }
+    .accounting-chart .bar {
+      width: 100%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(56,178,255,0.95), rgba(6,182,212,0.4));
+      height: var(--h);
+      min-height: 24px;
+      transition: height 0.6s ease;
+    }
+    .impact-card {
+      border-radius: 28px;
+      padding: 32px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.16);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .impact-card:hover { transform: translateY(-8px); box-shadow: 0 40px 100px rgba(0,0,0,0.2); }
+    .impact-number { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; color: #fff; }
+    .impact-label { color: rgba(255,255,255,0.75); font-size: 0.96rem; line-height: 1.75; }
+
+    .quote-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 52px 42px;
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(56,178,255,0.12), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 30px 100px rgba(0,0,0,0.2);
+    }
+    .quote-panel::after {
+      content: '';
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      right: -20%;
+      top: -20%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 55%);
+      filter: blur(64px);
+    }
+    .quote-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 24px;
+    }
+    .quote-mark {
+      font-size: 4rem;
+      color: rgba(56,178,255,0.18);
+      line-height: 1;
+    }
+    .quote-text {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      line-height: 1.05;
+      max-width: 820px;
+      margin: 0;
+    }
+    .quote-author {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .cta-panel {
+      margin: 0 auto;
+      max-width: var(--max-width);
+      padding: 100px 32px 120px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .cta-panel .panel-content {
+      display: grid;
+      gap: 24px;
+    }
+    .cta-panel h2 {
+      font-size: clamp(3rem, 4.5vw, 4.5rem);
+      line-height: 1.02;
+      margin: 0;
+    }
+    .cta-panel p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      max-width: 640px;
+    }
+    .cta-buttons { display: flex; flex-wrap: wrap; gap: 18px; }
+    .cta-panel .panel-glow {
+      position: relative;
+      padding: 34px;
+      border-radius: 32px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.22);
+    }
+    .cta-panel .panel-glow::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56,178,255,0.12), transparent 40%);
+      pointer-events: none;
+    }
+    .cta-panel .panel-glow h3 {
+      margin: 0 0 14px;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .cta-panel .panel-glow p { color: rgba(255,255,255,0.75); line-height: 1.85; }
+
+    .footer {
+      padding: 64px 32px 56px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer a { color: rgba(255,255,255,0.6); }
+
+    .cursor, .cursor-blur {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      mix-blend-mode: difference;
+      opacity: 0;
+    }
+    .cursor { background: rgba(255,255,255,0.95); box-shadow: 0 0 0 2px rgba(56,178,255,0.35); }
+    .cursor-blur { width: 110px; height: 110px; background: rgba(56,178,255,0.14); }
+    .cursor.active, .cursor-blur.active { opacity: 1; }
+    .cursor.hovered { transform: translate(-50%, -50%) scale(1.8); }
+    .cursor-blur.hovered { transform: translate(-50%, -50%) scale(1); opacity: 0.65; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+      filter: blur(10px);
+      transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    @keyframes text-wave {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes float {
+      to { transform: translateY(-16px); }
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes pulse {
+      0% { background: rgba(255,255,255,0.06); }
+      50% { background: rgba(255,255,255,0.08); }
+      100% { background: rgba(255,255,255,0.06); }
+    }
+    @keyframes loading-sweep {
+      0% { transform: translateX(-110%); }
+      100% { transform: translateX(110%); }
+    }
+
+    @media (max-width: 1140px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; }
+      .feature-grid, .impact-grid { grid-template-columns: 1fr; }
+      .cta-panel { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 520px; }
+      .floating-card { width: 260px; }
+    }
+    @media (max-width: 780px) {
+      .navbar { padding: 18px 22px; }
+      .nav-links { display: none; }
+      .hero { gap: 2rem; padding: 90px 20px 60px; }
+      .hero-title { font-size: clamp(3.2rem, 9vw, 4.4rem); }
+      .hero-copy p { font-size: 1.02rem; }
+      .hero-visual { min-height: 420px; }
+      .section { padding: 80px 20px; }
+      .feature-strip { margin-top: -80px; }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(40%); }
+      100% { transform: translateX(120%); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-shell"><span id="progress"></span></div>
+
+  <header class="navbar" role="banner">
+    <div class="brand">
+      <a href="/" style="display:inline-flex; align-items:center; gap:12px;">
+        <img src="/logo.png" alt="Kanbir Solutions" style="height:84px; width:auto; display:block;" />
+        <span class="sr-only">Kanbir Solutions</span>
+      </a>
+    </div>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/industries">Industries</a>
+      <a href="/insights">Insights</a>
+      <a href="/careers">Careers</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-ghost">Portal</button>
+      <button class="btn-primary">Book a strategy call</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <span class="eyebrow"><span>✓</span> Strategic Financial Intelligence</span>
+        <h1 class="hero-title">Financial Intelligence for <span class="gradient">Modern Businesses</span></h1>
+        <p>Kanbir Solutions positions growth-minded leaders with premium finance strategy, ERP transformation, tax optimisation and advisory that feels smarter than standard accountancy.</p>
+        <div class="hero-actions">
+          <button class="btn-primary">Start with a strategy call</button>
+          <button class="btn-ghost">Explore services</button>
+        </div>
+        <div class="hero-notes">
+          <div class="hero-note"><strong>500+</strong> growth partnerships across high-performance teams.</div>
+          <div class="hero-note"><strong>£40M+</strong> recovered through R&D and tax optimisation.</div>
+          <div class="hero-note"><strong>15+</strong> years of commercial finance and ERP advisory experience.</div>
+          <div class="hero-note"><strong>1,200+</strong> boardroom-ready reports and dashboards delivered.</div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="glass-panel reveal" style="top: 8%; left: 0; width: 320px;">
+          <div class="label">ERP transformation</div>
+          <strong>Connected finance ecosystems</strong>
+          <p>Align systems, data and teams with modern ERP strategy tailored for scale.</p>
+        </div>
+
+        <div class="glass-panel reveal" style="top: 34%; right: 0; width: 320px;">
+          <div class="label">Tax intelligence</div>
+          <strong>Compliance becomes a growth lever</strong>
+          <p>Streamlined reporting, R&D claims and planning that supports bold expansion.</p>
+        </div>
+
+        <div class="floating-card float-1 reveal">
+          <div class="label">KPI</div>
+          <div class="value" data-target="500">0+</div>
+          <div class="caption">Client relationships supported with finance confidence.</div>
+        </div>
+        <div class="floating-card float-2 reveal">
+          <div class="label">Recovery</div>
+          <div class="value" data-target="40">£0M+</div>
+          <div class="caption">Tax and R&D savings recovered for ambitious organisations.</div>
+        </div>
+        <div class="floating-card float-3 reveal">
+          <div class="label">Expertise</div>
+          <div class="value" data-target="15">0+</div>
+          <div class="caption">Years of strategic finance, advisory and systems leadership.</div>
+        </div>
+        <div class="dashboard-panel reveal" style="bottom: 6%; left: 0; width: 360px;">
+          <div class="dashboard-label">Premium finance dashboard</div>
+          <div class="dashboard-graph">
+            <span class="graph-bar" style="--h: 76%;"></span>
+            <span class="graph-bar" style="--h: 58%;"></span>
+            <span class="graph-bar" style="--h: 92%;"></span>
+            <span class="graph-bar" style="--h: 67%;"></span>
+            <span class="graph-bar" style="--h: 84%;"></span>
+          </div>
+          <div class="dashboard-kpis">
+            <div><strong>12%</strong> margin lift</div>
+            <div><strong>24%</strong> forecast accuracy</div>
+            <div><strong>6</strong> system integrations</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-strip reveal">
+      <div class="client-ribbon">
+        <div class="ribbon-track" aria-hidden="true">
+          <span class="ribbon-item">SAP</span>
+          <span class="ribbon-item">Oracle</span>
+          <span class="ribbon-item">Sage</span>
+          <span class="ribbon-item">Xero</span>
+          <span class="ribbon-item">QuickBooks</span>
+          <span class="ribbon-item">Microsoft</span>
+          <span class="ribbon-item">SAP</span>
+          <span class="ribbon-item">Oracle</span>
+          <span class="ribbon-item">Sage</span>
+          <span class="ribbon-item">Xero</span>
+          <span class="ribbon-item">QuickBooks</span>
+          <span class="ribbon-item">Microsoft</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-tag">Growth Partners</span>
+        <h2 class="section-title">A consulting experience that feels premium, fast, and decisive.</h2>
+        <p class="section-copy">Kanbir is built for businesses that need more than an accounting partner. We bring financial strategy, ERP transformation and advisory to teams that want to move with confidence.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <div class="feature-icon">💠</div>
+          <div class="feature-title">Strategic finance intelligence</div>
+          <div class="feature-loading"></div>
+          <p class="feature-description">Dynamic reporting, forecasting and modelling designed to amplify growth decisions across leadership teams.</p>
+          <span class="feature-chip">Premium advisory</span>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">⚙️</div>
+          <div class="feature-title">ERP transformation</div>
+          <div class="feature-loading"></div>
+          <p class="feature-description">Seamless ERP strategy, implementation and optimisation that unifies finance, sales and operations.</p>
+          <span class="feature-chip">Systems-first thinking</span>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">🧠</div>
+          <div class="feature-title">Tax, compliance & R&D</div>
+          <div class="feature-loading"></div>
+          <p class="feature-description">Aggressive yet compliant tax strategy that finds value while keeping your growth plans secure.</p>
+          <span class="feature-chip">Audit-grade delivery</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-tag">Why Kanbir</span>
+        <h2 class="section-title">Measured outcomes, not promises.</h2>
+      </div>
+      <div class="accounting-panel reveal">
+        <div class="accounting-row"><span>Revenue</span><strong>£6.8M</strong></div>
+        <div class="accounting-row"><span>Gross margin</span><strong>72%</strong></div>
+        <div class="accounting-row"><span>ERP efficiency</span><strong>89%</strong></div>
+        <div class="accounting-chart"><div class="bar" style="--h:78%"></div><div class="bar" style="--h:53%"></div><div class="bar" style="--h:91%"></div><div class="bar" style="--h:67%"></div></div>
+      </div>
+      <div class="impact-grid">
+        <article class="impact-card reveal">
+          <div class="impact-number">500+</div>
+          <p class="impact-label">Growth partnerships with scale-ready teams.</p>
+        </article>
+        <article class="impact-card reveal">
+          <div class="impact-number">98%</div>
+          <p class="impact-label">Client retention across advisory and transformation work.</p>
+        </article>
+        <article class="impact-card reveal">
+          <div class="impact-number">£40M+</div>
+          <p class="impact-label">Tax and R&D value recovered for ambitious businesses.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="quote-panel">
+        <div class="quote-content">
+          <div class="quote-mark">“</div>
+          <p class="quote-text">Kanbir feels less like a finance vendor and more like a growth partner — we now have the systems and insight to move faster and smarter.</p>
+          <div class="quote-author">Ambika Verma, COO, ScaleForge</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-panel reveal">
+      <div class="panel-content">
+        <h2>Ready to build a financial operating model that feels premium?</h2>
+        <p>Book a strategic session with Kanbir and see how financial intelligence, ERP transformation and tax planning can become a competitive advantage.</p>
+        <div class="cta-buttons">
+          <button class="btn-primary">Book a consultation</button>
+          <button class="btn-ghost">Download the approach</button>
+        </div>
+      </div>
+      <div class="panel-glow reveal">
+        <h3>Scope examples</h3>
+        <p>Revenue intelligence, transformation blueprints, R&D claims discovery, ERP readiness, and CFO-level advisory.</p>
+      </div>
+    </section>
+
+    <footer class="footer reveal">
+      <div>© 2026 Kanbir Solutions</div>
+      <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </footer>
+  </main>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-blur" id="cursorBlur"></div>
+
+  <script>
+    const progress = document.getElementById('progress');
+    const navbar = document.querySelector('.navbar');
+    const reveals = document.querySelectorAll('.reveal');
+    const counters = document.querySelectorAll('[data-target]');
+    const cursor = document.getElementById('cursor');
+    const cursorBlur = document.getElementById('cursorBlur');
+    const hoverTargets = document.querySelectorAll('button, .btn-ghost, .btn-primary, .nav-links a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.target.hasAttribute('data-target')) startCounter(entry.target);
+          if (entry.target.classList.contains('reveal')) observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    counters.forEach(el => observer.observe(el));
+
+    function startCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.textContent.trim().startsWith('£') ? '£' : '';
+      let current = 0;
+      const increment = Math.max(1, Math.floor(target / 80));
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        el.textContent = prefix + current + (target >= 40 ? (prefix ? 'M+' : '+') : '+');
+      }, 24);
+    }
+
+    window.addEventListener('scroll', () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scroll = window.scrollY;
+      const percent = height ? (scroll / height) * 100 : 0;
+      progress.style.width = percent + '%';
+      navbar.classList.toggle('sticky', scroll > 20);
+    }, { passive: true });
+
+    document.addEventListener('mousemove', (event) => {
+      const { clientX: x, clientY: y } = event;
+      cursor.style.transform = `translate(${x}px, ${y}px)`;
+      cursorBlur.style.transform = `translate(${x}px, ${y}px)`;
+      cursor.classList.add('active');
+      cursorBlur.classList.add('active');
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.classList.remove('active');
+      cursorBlur.classList.remove('active');
+    });
+
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hovered');
+        cursorBlur.classList.add('hovered');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hovered');
+        cursorBlur.classList.remove('hovered');
+      });
+    });
+
+    document.querySelectorAll('.ribbon-track').forEach(track => {
+      const clone = track.innerHTML;
+      track.innerHTML += clone;
+    });
+  </script>
+</body>
+</html>

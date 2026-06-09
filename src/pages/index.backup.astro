@@ -1,0 +1,681 @@
+﻿---
+// Home Page - Kanbir Solutions
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kanbir Solutions — accounting, tax, ERP, advisory and R&D services for ambitious businesses." />
+  <title>Kanbir Solutions | Strategic Finance, Tax & ERP Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f7fbff;
+      --surface: #ffffff;
+      --surface-soft: #eff6ff;
+      --text: #10243b;
+      --muted: #5f718d;
+      --accent: #1f6eed;
+      --accent-light: #60a5fa;
+      --border: rgba(31,110,237,0.12);
+      --shadow: 0 30px 70px rgba(31,110,237,0.12);
+      --radius: 28px;
+      --transition: all 0.25s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(96,165,250,0.18), transparent 25%), radial-gradient(circle at bottom left, rgba(59,130,246,0.08), transparent 20%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      backdrop-filter: blur(24px);
+      background: rgba(255,255,255,0.88);
+      border-bottom: 1px solid rgba(31,110,237,0.1);
+      transition: var(--transition);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-logo span {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      box-shadow: 0 14px 35px rgba(31,110,237,0.18);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      background: rgba(96,165,250,0.12);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      padding: 12px 24px;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      box-shadow: 0 20px 45px rgba(31,110,237,0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(31,110,237,0.06);
+      color: var(--accent);
+      border: 1px solid rgba(31,110,237,0.18);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 120px 32px 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 5vw, 5rem);
+      line-height: 0.95;
+      max-width: 680px;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 strong {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 18px;
+      background: var(--surface);
+      padding: 32px;
+      border-radius: 32px;
+      border: 1px solid rgba(31,110,237,0.08);
+      box-shadow: 0 28px 70px rgba(31,110,237,0.1);
+    }
+
+    .hero-panel .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .hero-panel .panel-copy {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.98rem;
+    }
+
+    .hero-panel .panel-stat {
+      display: grid;
+      gap: 10px;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: rgba(31,110,237,0.06);
+    }
+
+    .hero-panel .panel-stat h3 {
+      font-size: 2rem;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .hero-panel .panel-stat p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .section-head span {
+      display: inline-flex;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      line-height: 1.05;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .services-grid,
+    .stats-grid,
+    .process,
+    .testimonial-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 80px; }
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 32px;
+      border-radius: 32px;
+      background: var(--surface);
+      border: 1px solid rgba(31,110,237,0.08);
+      box-shadow: 0 30px 70px rgba(31,110,237,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 42px 90px rgba(31,110,237,0.16);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .service-card .link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 88px; }
+    .stat-card {
+      background: var(--surface-soft);
+      border: 1px solid rgba(31,110,237,0.1);
+      border-radius: 28px;
+      padding: 28px;
+      display: grid;
+      gap: 14px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
+    }
+
+    .stat-card h3 {
+      font-size: 2.4rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .process { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 88px; }
+    .process-step {
+      background: var(--surface);
+      border: 1px solid rgba(31,110,237,0.08);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 24px 55px rgba(31,110,237,0.08);
+      display: grid;
+      gap: 16px;
+    }
+
+    .process-step span {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(31,110,237,0.1);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .process-step h3 {
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .process-step p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .testimonial-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 88px; }
+    .testimonial-card {
+      background: var(--surface);
+      border-radius: 30px;
+      border: 1px solid rgba(31,110,237,0.08);
+      padding: 32px;
+      box-shadow: 0 28px 70px rgba(31,110,237,0.08);
+      display: grid;
+      gap: 18px;
+    }
+
+    .testimonial-card p { color: var(--muted); line-height: 1.85; }
+    .testimonial-author { font-weight: 700; color: var(--text); }
+    .testimonial-role { color: #64748b; font-size: 0.95rem; }
+
+    .footer-cta {
+      background: linear-gradient(135deg, rgba(31,110,237,0.12), rgba(96,165,250,0.08));
+      border: 1px solid rgba(31,110,237,0.14);
+      border-radius: 32px;
+      padding: 52px 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .footer-cta h2 {
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .footer-cta p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .footer-cta .footer-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+
+    .mouse-follower,
+    .mouse-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .mouse-follower.active,
+    .mouse-glow.active { opacity: 1; }
+
+    .mouse-follower {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(31,110,237,0.95), rgba(96,165,250,0.85));
+      box-shadow: 0 0 30px rgba(31,110,237,0.35);
+      transform: translate(-50%, -50%);
+    }
+
+    .mouse-glow {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31,110,237,0.16), transparent 55%);
+      transform: translate(-50%, -50%);
+    }
+
+    @media (max-width: 1080px) {
+      .hero { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .process { grid-template-columns: 1fr 1fr; }
+      .footer-cta { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner { flex-direction: column; align-items: flex-start; padding: 20px; }
+      .nav-links { justify-content: flex-start; }
+      .hero { padding: 80px 24px 40px; }
+      .section { padding: 0 24px; }
+      .services-grid, .stats-grid, .process, .testimonial-grid { grid-template-columns: 1fr; }
+      .footer-cta { padding: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/">
+        <span>KS</span>
+        Kanbir Solutions
+      </a>
+      <nav class="nav-links">
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/industries">Industries</a>
+        <a href="/insights">Insights</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-secondary">Client Portal</button>
+        <button class="btn btn-primary">Book a Call</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Trusted by ambitious businesses across the UK</span>
+        <h1>Accountancy, tax and systems support that helps businesses scale with confidence.</h1>
+        <p>Kanbir Solutions delivers growth-ready finance through bookkeeping, VAT, R&amp;D claims, ERP integration and advisory support designed for fast-moving businesses.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary">Start a consultation</button>
+          <button class="btn btn-secondary">Explore services</button>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-title">Our focus areas</div>
+        <div class="panel-copy">A unified approach to finance, compliance and advisory that removes friction and keeps leadership aligned.</div>
+        <div class="panel-stat">
+          <h3>500+</h3>
+          <p>Businesses supported with strategic accounting and tax.</p>
+        </div>
+        <div class="panel-stat">
+          <h3>£40M+</h3>
+          <p>R&amp;D tax relief recovered for clients.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>What we do</span>
+        <h2>Built for finance teams that want more than reports.</h2>
+        <p>From daily bookkeeping to complex ERP delivery, we provide the systems, reporting and advisory needed for the next phase of growth.</p>
+      </div>
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>Accounting & Bookkeeping</h3>
+          <p>Real-time ledger updates, month-end workflows, and clean financial reporting that keeps your team moving.</p>
+          <a class="link" href="/services">View service</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">🧾</div>
+          <h3>Tax & Compliance</h3>
+          <p>Proactive VAT, corporate tax and payroll support that reduces risk and uncovers savings.</p>
+          <a class="link" href="/services">View service</a>
+        </article>
+        <article class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3>ERP & Systems</h3>
+          <p>ERP integration and automation that synchronises finance, operations and sales across your business.</p>
+          <a class="link" href="/services">View service</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>Proven impact</span>
+        <h2>Results that matter for growing teams.</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>500+</h3>
+          <p>Clients supported across sectors.</p>
+        </div>
+        <div class="stat-card">
+          <h3>98%</h3>
+          <p>Client satisfaction rate from long-term engagements.</p>
+        </div>
+        <div class="stat-card">
+          <h3>£40M+</h3>
+          <p>R&D tax relief recovered for innovative businesses.</p>
+        </div>
+        <div class="stat-card">
+          <h3>24/7</h3>
+          <p>Support through tax deadlines, financial closes and growth plans.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>How we work</span>
+        <h2>Our process is simple, transparent and outcome-driven.</h2>
+      </div>
+      <div class="process">
+        <article class="process-step">
+          <span>1</span>
+          <h3>Discovery</h3>
+          <p>We map your finance, systems and growth priorities to define the right scope.</p>
+        </article>
+        <article class="process-step">
+          <span>2</span>
+          <h3>Blueprint</h3>
+          <p>We design a customised plan for accounting, ERP, tax and advisory workstreams.</p>
+        </article>
+        <article class="process-step">
+          <span>3</span>
+          <h3>Execution</h3>
+          <p>We deliver with minimal disruption and rapid business impact.</p>
+        </article>
+        <article class="process-step">
+          <span>4</span>
+          <h3>Growth support</h3>
+          <p>We stay involved with reporting, planning and strategic advisory.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>Client outcomes</span>
+        <h2>Trusted by businesses that move fast.</h2>
+        <p>Our clients choose us for clarity, speed and a finance partner who understands growth.</p>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial-card">
+          <p>“Kanbir gave us the confidence to scale quickly without sacrificing accuracy. Their ERP and tax team are incredibly responsive.”</p>
+          <div>
+            <div class="testimonial-author">Olivia Bennett</div>
+            <div class="testimonial-role">CFO, Verity Labs</div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <p>“The advisory insight and R&D support unlocked real savings. We now have a finance foundation we can trust.”</p>
+          <div>
+            <div class="testimonial-author">James Patel</div>
+            <div class="testimonial-role">COO, NovaTech</div>
+          </div>
+        </article>
+        <article class="testimonial-card">
+          <p>“Their systems team helped us connect Xero, HubSpot and our ERP so we finally had one source of truth.”</p>
+          <div>
+            <div class="testimonial-author">Sophie Clarke</div>
+            <div class="testimonial-role">Founder, BrightPath</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="footer-cta">
+        <div>
+          <h2>Ready to turn finance into a growth advantage?</h2>
+          <p>Book a free consultation and see how Kanbir Solutions can simplify accounting, reduce tax risk, and support your next stage.</p>
+        </div>
+        <div class="footer-buttons">
+          <button class="btn btn-primary">Book a consultation</button>
+          <button class="btn btn-secondary">Download our service guide</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Kanbir Solutions. All rights reserved.</p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="mouse-follower"></div>
+  <div class="mouse-glow"></div>
+
+  <script>
+    const follower = document.querySelector('.mouse-follower');
+    const glow = document.querySelector('.mouse-glow');
+    document.addEventListener('mousemove', e => {
+      follower.classList.add('active');
+      glow.classList.add('active');
+      follower.style.left = e.clientX + 'px';
+      follower.style.top = e.clientY + 'px';
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', () => {
+      follower.classList.remove('active');
+      glow.classList.remove('active');
+    });
+    const nav = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      nav.style.boxShadow = window.scrollY > 20 ? '0 20px 60px rgba(31,110,237,0.12)' : '0 0 0 rgba(0,0,0,0)';
+    });
+  </script>
+</body>
+</html>

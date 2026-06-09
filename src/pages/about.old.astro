@@ -1,0 +1,464 @@
+---
+// About Page - Kanbir Solutions
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Kanbir Solutions — trusted advisors for accounting, tax, ERP and business growth." />
+  <title>About | Kanbir Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #081b34;
+      --surface: #0f2754;
+      --surface-soft: rgba(255,255,255,0.08);
+      --text: #eff7ff;
+      --muted: #c7d7ee;
+      --accent: #6fb1ff;
+      --accent-strong: #2f88ff;
+      --border: rgba(255,255,255,0.1);
+      --shadow: 0 40px 90px rgba(0,0,0,0.35);
+      --radius: 28px;
+      --transition: all 0.3s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, rgba(56,178,255,0.18), transparent 22%), #081b34;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent 24%), radial-gradient(circle at bottom left, rgba(96,165,250,0.07), transparent 18%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      background: rgba(12,28,60,0.92);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(22px);
+      transition: var(--transition);
+    }
+
+    .navbar.sticky { background: rgba(255,255,255,0.98); padding: 10px 0; box-shadow: 0 10px 40px rgba(2,6,23,0.06); }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .nav-logo span {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(111,177,255,0.9), rgba(47,136,255,0.95));
+      color: #081b34;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      background: rgba(111,177,255,0.12);
+    }
+
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .btn { border-radius: 14px; border: none; cursor: pointer; font-weight: 700; padding: 12px 24px; transition: var(--transition); }
+    .btn-primary { background: linear-gradient(135deg, rgba(111,177,255,0.95), rgba(47,136,255,0.95)); color: #081b34; }
+    .btn-secondary { background: rgba(255,255,255,0.08); color: var(--text); border: 1px solid rgba(255,255,255,0.15); }
+    .btn:hover { transform: translateY(-2px); }
+
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 120px 32px 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.88rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3.4rem, 5vw, 5.4rem);
+      line-height: 0.95;
+      max-width: 700px;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-copy h1 strong { color: var(--accent); }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 660px;
+    }
+
+    .hero-copy .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 32px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero-panel h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .hero-panel p { color: var(--muted); line-height: 1.75; }
+
+    .hero-panel .panel-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .hero-panel .panel-item h4 { font-size: 1rem; margin-bottom: 10px; }
+    .hero-panel .panel-item p { color: var(--muted); }
+
+    .section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .section-head span {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: 1.05;
+      max-width: 720px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .values-grid,
+    .team-grid,
+    .story-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .story-grid { grid-template-columns: 1fr 1fr; align-items: center; margin-bottom: 80px; }
+
+    .story-copy h3 { font-size: 1.8rem; margin-bottom: 20px; }
+    .story-copy p { color: var(--muted); line-height: 1.8; }
+    .story-copy .pill { display: inline-flex; gap: 10px; align-items: center; background: rgba(255,255,255,0.08); border-radius: 999px; padding: 10px 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 22px; }
+    .story-copy .pill span { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+
+    .story-visual {
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .story-visual img { width: 100%; display: block; }
+
+    .values-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 80px; }
+    .value-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 32px;
+      padding: 32px;
+      box-shadow: 0 26px 60px rgba(0,0,0,0.18);
+      transition: var(--transition);
+    }
+    .value-card:hover { transform: translateY(-6px); }
+    .value-card h3 { font-size: 1.2rem; margin-bottom: 16px; }
+    .value-card p { color: var(--muted); line-height: 1.8; }
+
+    .team-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 88px; }
+    .team-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 28px;
+      padding: 28px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .team-card:hover { transform: translateY(-8px); }
+    .team-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      background: rgba(111,177,255,0.18);
+      color: #fff;
+      font-size: 2rem;
+    }
+    .team-card h3 { margin-bottom: 8px; }
+    .team-card p { color: var(--muted); line-height: 1.75; font-size: 0.95rem; }
+    .team-role { color: var(--accent); font-size: 0.95rem; margin-bottom: 12px; }
+
+    .footer-cta {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 32px;
+      padding: 48px;
+      margin-bottom: 80px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-cta h2 { font-size: clamp(2rem, 4vw, 3.4rem); margin-bottom: 14px; }
+    .footer-cta p { color: var(--muted); line-height: 1.8; }
+    .footer-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .mouse-follower,
+    .mouse-glow {
+      position: fixed; top:0; left:0; pointer-events:none; z-index:9999; opacity:0; transition: opacity 0.25s ease;
+    }
+    .mouse-follower.active,
+    .mouse-glow.active { opacity: 1; }
+    .mouse-follower { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, rgba(111,177,255,0.95), rgba(47,136,255,0.95)); box-shadow: 0 0 28px rgba(47,136,255,0.35); transform: translate(-50%, -50%); }
+    .mouse-glow { width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(111,177,255,0.2), transparent 55%); transform: translate(-50%, -50%); }
+
+    @media (max-width: 1080px) { .hero, .story-grid { grid-template-columns: 1fr; } .values-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .footer-cta { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .nav-inner { flex-direction: column; align-items: flex-start; padding: 20px; } .nav-links { justify-content: flex-start; } .hero { padding: 80px 24px 40px; } .section { padding: 0 24px; } .values-grid, .team-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/" style="display:inline-flex; align-items:center; gap:12px;">
+        <img src="/logo.png" alt="Kanbir Solutions" style="height:84px; width:auto; display:block;" />
+        <span class="sr-only">Kanbir Solutions</span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-secondary">Client Portal</button>
+        <button class="btn btn-primary">Get in Touch</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Creative finance for modern businesses</span>
+        <h1>We help ambitious companies turn finance into a growth engine.</h1>
+        <p>Kanbir Solutions brings accounting, tax, ERP and advisory together with clear strategy, so leaders can make faster decisions and grow without the usual complexity.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Talk to an expert</button>
+          <button class="btn btn-secondary">Download our story</button>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-item">
+          <h4>Founded for ambitious teams</h4>
+          <p>We build practical finance systems for businesses that need speed, compliance and clarity.</p>
+        </div>
+        <div class="panel-item">
+          <h4>Trusted in the UK and beyond</h4>
+          <p>From fast-growing startups to established firms, our clients rely on us for commercial, tax and operational insight.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>About us</span>
+        <h2>Built around clarity, speed and commercial outcomes.</h2>
+        <p>Our mission is to remove friction from finance. We blend accounting expertise with advisory and systems implementation to help businesses make smarter choices in real time.</p>
+      </div>
+      <div class="story-grid">
+        <div class="story-copy">
+          <div class="pill"><span></span> Our values in action</div>
+          <h3>We focus on outcomes that matter — growth, cash, compliance and founders’ peace of mind.</h3>
+          <p>Kanbir Solutions is built for teams that know numbers are not an afterthought. We create compact finance operations that support product, sales and leadership equally.</p>
+        </div>
+        <div class="story-visual">
+          <img src="https://images.unsplash.com/photo-1554166800-60518f1ea03e?auto=format&fit=crop&w=900&q=80" alt="Team planning finance strategy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>Experience</span>
+        <h2>How we work with ambitious businesses.</h2>
+        <p>We combine advisory, technology and tax with a hands-on implementation team so finance becomes a lever, not a burden.</p>
+      </div>
+      <div class="values-grid">
+        <article class="value-card">
+          <h3>Finance done right</h3>
+          <p>Accurate bookkeeping, clear reporting and management accounts that leaders can actually use.</p>
+        </article>
+        <article class="value-card">
+          <h3>Tax that works for you</h3>
+          <p>From VAT to R&D relief, we protect cash and cut the noise out of compliance.</p>
+        </article>
+        <article class="value-card">
+          <h3>Systems that scale</h3>
+          <p>ERP integration and automation to remove manual work and keep all teams aligned.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <span>Team</span>
+        <h2>The people behind the numbers.</h2>
+        <p>A focused team of accountants, tax specialists and systems experts who lean in on every engagement.</p>
+      </div>
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="team-avatar">RK</div>
+          <h3>Rajesh Kumar</h3>
+          <div class="team-role">Founder & CEO</div>
+          <p>Guiding strategy and ensuring every client receives proactive advice, not just reports.</p>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar">SM</div>
+          <h3>Sarah Mitchell</h3>
+          <div class="team-role">Head of Tax</div>
+          <p>Leading every tax conversation with clarity, compliance and cash-saving opportunities.</p>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar">JC</div>
+          <h3>James Chen</h3>
+          <div class="team-role">ERP Director</div>
+          <p>Turning manual finance operations into connected systems that support fast growth.</p>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar">ET</div>
+          <h3>Emma Thompson</h3>
+          <div class="team-role">Business Advisory</div>
+          <p>Helping clients align financial strategy with scaling plans and commercial goals.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="footer-cta">
+        <div>
+          <h2>Ready to move fast with confidence?</h2>
+          <p>Let’s build the finance foundation that supports your next stage of growth.</p>
+        </div>
+        <div class="footer-buttons">
+          <button class="btn btn-primary">Start a conversation</button>
+          <button class="btn btn-secondary">See our service approach</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="mouse-follower"></div>
+  <div class="mouse-glow"></div>
+
+  <script>
+    const follower = document.querySelector('.mouse-follower');
+    const glow = document.querySelector('.mouse-glow');
+    document.addEventListener('mousemove', e => {
+      follower.classList.add('active');
+      glow.classList.add('active');
+      follower.style.left = `${e.clientX}px`;
+      follower.style.top = `${e.clientY}px`;
+      glow.style.left = `${e.clientX}px`;
+      glow.style.top = `${e.clientY}px`;
+    });
+    document.addEventListener('mouseleave', () => {
+      follower.classList.remove('active');
+      glow.classList.remove('active');
+    });
+    const nav = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('sticky', window.scrollY > 20);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,962 @@
+---
+// About Page - Kanbir Solutions
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Kanbir Solutions — Expert financial consulting, accounting, and business advisory services" />
+  <title>About Us | Kanbir Solutions</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═════════════════════════════════════════════════════════ */
+    /* COLOR TOKENS - Light & Dark Blue Mix                     */
+    /* ═════════════════════════════════════════════════════════ */
+    :root {
+      --navy-dark:    #050e27;
+      --navy:         #0b1d4a;
+      --blue-deep:    #1a56db;
+      --blue:         #2563eb;
+      --blue-mid:     #3b82f6;
+      --blue-light:   #60a5fa;
+      --blue-lighter: #93c5fd;
+      --blue-pale:    #dbeafe;
+      --blue-ice:     #eff6ff;
+      --white:        #ffffff;
+      --gray-100:     #f3f4f6;
+      --gray-700:     #374151;
+      --gray-800:     #1f2937;
+      --text-dark:    #1f2937;
+      --text-light:   #6b7280;
+      --bg-light:     #ffffff;
+      --bg-alt:       #f9fafb;
+      
+      --shadow-sm:    0 1px 2px rgba(26,86,219,0.05);
+      --shadow-md:    0 4px 12px rgba(26,86,219,0.1);
+      --shadow-lg:    0 10px 30px rgba(26,86,219,0.15);
+      --shadow-xl:    0 20px 50px rgba(26,86,219,0.2);
+      
+      --transition:   all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* RESET & BASE                                             */
+    /* ═════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* ANIMATIONS                                               */
+    /* ═════════════════════════════════════════════════════════ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* NAVBAR                                                   */
+    /* ═════════════════════════════════════════════════════════ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(26,86,219,0.1);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .nav-logo:hover { transform: scale(1.05); }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      background: var(--blue-ice);
+    }
+
+    .nav-links a:hover::before { width: 60%; }
+
+    .nav-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-nav {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .btn-nav.secondary {
+      border: 2px solid var(--blue-light);
+      color: var(--blue);
+      background: transparent;
+    }
+
+    .btn-nav.secondary:hover {
+      background: var(--blue-ice);
+      border-color: var(--blue-mid);
+    }
+
+    .btn-nav.primary {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      color: white;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-nav.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* HERO SECTION                                             */
+    /* ═════════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding: 120px 60px;
+      background: linear-gradient(135deg, var(--blue-ice) 0%, var(--white) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(37,99,235,0.15), transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(96,165,250,0.1), transparent 70%);
+      border-radius: 50%;
+      filter: blur(50px);
+      animation: float 10s ease-in-out infinite 1s;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(96,165,250,0.05));
+      border: 1px solid var(--blue-light);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 20px;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.2;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 50%, var(--blue-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      max-width: 550px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-image {
+      position: relative;
+      z-index: 3;
+      animation: slideInRight 0.8s ease-out 0.3s both;
+    }
+
+    .image-card {
+      background: linear-gradient(135deg, var(--blue-pale) 0%, var(--blue-ice) 100%);
+      border: 2px solid rgba(37,99,235,0.2);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .image-card .icon {
+      font-size: 5rem;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .image-card h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .image-card p {
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* STORY SECTION                                            */
+    /* ═════════════════════════════════════════════════════════ */
+    .story-section {
+      padding: 100px 60px;
+      background: var(--bg-light);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .story-content {
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(96,165,250,0.1), rgba(37,99,235,0.05));
+      border: 1px solid var(--blue-light);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 15px;
+    }
+
+    .story-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.3;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .story-title span {
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .story-text {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text-light);
+      margin-bottom: 25px;
+    }
+
+    .story-highlights {
+      display: grid;
+      gap: 15px;
+    }
+
+    .highlight-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 15px;
+      background: var(--blue-ice);
+      border-radius: 12px;
+      border-left: 4px solid var(--blue);
+      transition: var(--transition);
+    }
+
+    .highlight-item:hover {
+      transform: translateX(10px);
+      background: linear-gradient(135deg, var(--blue-pale), var(--blue-ice));
+    }
+
+    .highlight-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .highlight-text h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+
+    .highlight-text p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .story-image {
+      position: relative;
+      animation: slideInRight 0.8s ease-out;
+    }
+
+    .story-img-box {
+      background: linear-gradient(135deg, var(--blue-pale) 0%, var(--blue-ice) 100%);
+      border: 2px solid rgba(37,99,235,0.2);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .story-img-box .icon {
+      font-size: 6rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* TEAM SECTION                                             */
+    /* ═════════════════════════════════════════════════════════ */
+    .team-section {
+      padding: 100px 60px;
+      background: linear-gradient(135deg, var(--blue-ice) 0%, var(--white) 100%);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 70px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.3;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 15px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      background: var(--white);
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 16px;
+      padding: 30px 25px;
+      text-align: center;
+      transition: var(--transition);
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .team-card:nth-child(1) { animation-delay: 0s; }
+    .team-card:nth-child(2) { animation-delay: 0.1s; }
+    .team-card:nth-child(3) { animation-delay: 0.2s; }
+    .team-card:nth-child(4) { animation-delay: 0.3s; }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--blue-light);
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .team-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .team-role {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 15px;
+    }
+
+    .team-card p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* VALUES SECTION                                           */
+    /* ═════════════════════════════════════════════════════════ */
+    .values-section {
+      padding: 100px 60px;
+      background: var(--bg-light);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .value-card {
+      padding: 40px;
+      background: linear-gradient(135deg, var(--blue-ice) 0%, var(--white) 100%);
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 16px;
+      text-align: center;
+      transition: var(--transition);
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .value-card:nth-child(1) { animation-delay: 0s; }
+    .value-card:nth-child(2) { animation-delay: 0.1s; }
+    .value-card:nth-child(3) { animation-delay: 0.2s; }
+
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--blue-light);
+    }
+
+    .value-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .value-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 15px;
+    }
+
+    .value-card p {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* CTA SECTION                                              */
+    /* ═════════════════════════════════════════════════════════ */
+    .cta-section {
+      padding: 100px 60px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--blue-deep) 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(96,165,250,0.15), transparent);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .cta-section::after {
+      content: "";
+      position: absolute;
+      bottom: -50%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(37,99,235,0.1), transparent);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      color: white;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .btn.light {
+      background: white;
+      color: var(--blue);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn.light:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* MOUSE EFFECTS                                            */
+    /* ═════════════════════════════════════════════════════════ */
+    .mouse-follower {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.6;
+      mix-blend-mode: screen;
+      box-shadow: 0 0 20px rgba(37,99,235,0.4);
+      display: none;
+    }
+
+    .mouse-follower.active { display: block; }
+
+    .mouse-glow {
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(37,99,235,0.2), transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+      filter: blur(30px);
+    }
+
+    .mouse-glow.active { display: block; }
+
+    /* ═════════════════════════════════════════════════════════ */
+    /* RESPONSIVE                                               */
+    /* ═════════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; padding: 80px 40px; gap: 40px; }
+      .story-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .story-section { padding: 80px 40px; }
+      .team-section { padding: 80px 40px; }
+      .values-section { padding: 80px 40px; }
+      .cta-section { padding: 80px 40px; }
+      .nav-inner { padding: 0 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 30px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .story-section { padding: 60px 24px; }
+      .team-section { padding: 60px 24px; }
+      .values-section { padding: 60px 24px; }
+      .cta-section { padding: 60px 24px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <span>📊</span> Kanbir Solutions
+      </a>
+      
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-nav secondary">Portal</button>
+        <button class="btn-nav primary">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════ HERO ════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🌟 Our Story</div>
+      
+      <h1>Leading Financial <span>Excellence</span> Through Innovation</h1>
+      
+      <p>Kanbir Solutions was founded on a simple principle: businesses deserve financial guidance they can trust. For over 15 years, we've been transforming financial complexity into strategic clarity for hundreds of companies.</p>
+    </div>
+
+    <div class="hero-image">
+      <div class="image-card">
+        <div class="icon">🚀</div>
+        <h3>Driving Growth</h3>
+        <p>Empowering businesses with expert guidance and precision-driven solutions</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ STORY ════════════════ -->
+  <section class="story-section">
+    <div class="story-grid">
+      <div class="story-content">
+        <div class="section-label">Our Mission</div>
+        <h2 class="story-title">Transforming <span>Financial Strategy</span> into Real Growth</h2>
+        
+        <p class="story-text">
+          We believe that exceptional financial management is the foundation for business success. Our team of expert accountants, tax strategists, and business advisors work collaboratively to understand your unique challenges and deliver solutions tailored to your goals.
+        </p>
+
+        <div class="story-highlights">
+          <div class="highlight-item">
+            <div class="highlight-icon">💡</div>
+            <div class="highlight-text">
+              <h4>Expert Strategy</h4>
+              <p>Proven methodologies and deep industry knowledge</p>
+            </div>
+          </div>
+
+          <div class="highlight-item">
+            <div class="highlight-icon">🤝</div>
+            <div class="highlight-text">
+              <h4>True Partnership</h4>
+              <p>Collaborative approach treating your success as ours</p>
+            </div>
+          </div>
+
+          <div class="highlight-item">
+            <div class="highlight-icon">📊</div>
+            <div class="highlight-text">
+              <h4>Data-Driven Results</h4>
+              <p>Transparent reporting with actionable insights</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-image">
+        <div class="story-img-box">
+          <div class="icon">💼</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ VALUES ════════════════ -->
+  <section class="values-section">
+    <div class="section-header">
+      <div class="section-label">Core Values</div>
+      <h2 class="section-title">What <span>Guides Us</span></h2>
+      <p class="section-description">Our values shape every decision we make and every service we deliver</p>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <h3>Precision</h3>
+        <p>Meticulous attention to detail in every aspect of our work ensures accuracy and compliance with the highest standards.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">🤲</div>
+        <h3>Integrity</h3>
+        <p>Honest, transparent communication and ethical practices form the foundation of all our client relationships.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">🚀</div>
+        <h3>Innovation</h3>
+        <p>Continuous adoption of cutting-edge technology and forward-thinking strategies to drive superior results.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ TEAM ════════════════ -->
+  <section class="team-section">
+    <div class="section-header">
+      <div class="section-label">Our Team</div>
+      <h2 class="section-title">Meet Our <span>Expert Team</span></h2>
+      <p class="section-description">Dedicated professionals committed to your financial success</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👤</div>
+        <h3>Rajesh Kumar</h3>
+        <div class="team-role">Founder & CEO</div>
+        <p>20+ years in accounting and business strategy. Leading vision for Kanbir Solutions with deep expertise across sectors.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👩‍💼</div>
+        <h3>Sarah Mitchell</h3>
+        <div class="team-role">Head of Taxation</div>
+        <p>Specialized in UK and international tax strategy. Helping businesses optimize tax positions and ensure compliance.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👨‍💻</div>
+        <h3>James Chen</h3>
+        <div class="team-role">ERP Solutions Director</div>
+        <p>Expert in enterprise resource planning systems. Streamlining operations for businesses of all sizes globally.</p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👩‍📊</div>
+        <h3>Emma Thompson</h3>
+        <div class="team-role">Business Advisory Lead</div>
+        <p>Strategic consultant helping businesses scale efficiently. Focus on growth optimization and operational excellence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ CTA ════════════════ -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Join 500+ Businesses Growing with Kanbir</h2>
+      <p>Let's discuss how we can transform your financial strategy into tangible growth and sustained success.</p>
+      
+      <div class="cta-buttons">
+        <button class="btn primary">Start Your Journey</button>
+        <button class="btn light">Request Consultation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ MOUSE EFFECTS ════════════════ -->
+  <div class="mouse-follower"></div>
+  <div class="mouse-glow"></div>
+
+  <script>
+    // Mouse Follower Effect
+    const follower = document.querySelector('.mouse-follower');
+    const glow = document.querySelector('.mouse-glow');
+
+    document.addEventListener('mousemove', (e) => {
+      follower.classList.add('active');
+      glow.classList.add('active');
+
+      follower.style.left = (e.clientX - 15) + 'px';
+      follower.style.top = (e.clientY - 15) + 'px';
+
+      glow.style.left = (e.clientX - 50) + 'px';
+      glow.style.top = (e.clientY - 50) + 'px';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      follower.classList.remove('active');
+      glow.classList.remove('active');
+    });
+
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.style.boxShadow = 'var(--shadow-md)';
+      } else {
+        navbar.style.boxShadow = 'var(--shadow-sm)';
+      }
+    });
+
+    // Interactive card effects
+    const cards = document.querySelectorAll('.value-card, .team-card, .highlight-item');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
