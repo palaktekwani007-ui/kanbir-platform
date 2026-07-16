@@ -1,729 +1,603 @@
 ---
-// About Page - Kanbir Solutions | Premium Redesign
+// src/pages/about.astro
+import Layout from "./layout.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="About Kanbir Solutions — premium ERP integration, accounting, taxation and financial advisory for ambitious businesses." />
-  <title>About | Kanbir Solutions</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<Layout
+  title="About | Kanbir Solutions"
+  description="Who we are — Kanbir Solutions, your trusted financial and business consulting partner."
+>
 
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg-dark: #020617;
-      --navy-1: #071126;
-      --navy-2: #0F172A;
-      --navy-3: #111827;
-      --blue-1: #2563EB;
-      --blue-2: #3B82F6;
-      --blue-3: #60A5FA;
-      --blue-soft: #93C5FD;
-      --cyan: #38BDF8;
-      --teal: #06B6D4;
-      --text: #f8fbff;
-      --text-secondary: rgba(248, 251, 255, 0.75);
-      --text-muted: rgba(248, 251, 255, 0.55);
-      --transition: 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-      --max-width: 1280px;
-    }
+<style>
+  /* ─── PAGE-SPECIFIC STYLES ─── */
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle at top left, rgba(56,178,255,0.16), transparent 20%), 
-                  radial-gradient(circle at 20% 5%, rgba(96,165,250,0.08), transparent 18%), 
-                  var(--bg-dark);
-      overflow-x: hidden;
-    }
+  /* Stats bar */
+  .about-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .about-stat-num {
+    font-family: var(--f-serif);
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--c-white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .about-stat-label {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--c-white-35);
+    letter-spacing: 0.04em;
+  }
+  .about-stat-divider {
+    width: 1px;
+    background: var(--c-border);
+    align-self: stretch;
+  }
 
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
+  /* Pillars */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--c-border);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .pillar-card {
+    background: var(--c-surface);
+    padding: 40px 36px;
+    transition: background var(--t-mid) var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37,99,235,0.4), transparent);
+    opacity: 0;
+    transition: opacity var(--t-mid) var(--ease);
+  }
+  .pillar-card:hover { background: var(--c-surface-2); }
+  .pillar-card:hover::before { opacity: 1; }
+  .pillar-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-blue-bright);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pillar-num::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--c-blue-bright);
+  }
+  .pillar-card h3 {
+    font-family: var(--f-serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--c-white);
+    margin-bottom: 12px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+  }
+  .pillar-card p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    line-height: 1.75;
+  }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at 85% 10%, rgba(96,165,250,0.12), transparent 22%), 
-                  radial-gradient(circle at 10% 90%, rgba(56,178,255,0.08), transparent 18%);
-      opacity: 0.7;
-    }
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--c-blue), rgba(37,99,235,0.1));
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -36px; top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--c-blue);
+    box-shadow: 0 0 0 3px var(--c-bg), 0 0 12px var(--c-blue);
+  }
+  .timeline-year {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-blue-bright);
+    margin-bottom: 6px;
+  }
+  .timeline-item h4 {
+    font-family: var(--f-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--c-white);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .timeline-item p {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    line-height: 1.65;
+  }
 
-    .progress-shell {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: rgba(255,255,255,0.05);
-      z-index: 60;
-      overflow: hidden;
-    }
-    .progress-shell span {
-      display: block;
-      width: 0;
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue-2), var(--cyan), var(--teal));
-      transition: width 0.2s ease-out;
-    }
+  /* Values */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .value-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 28px 24px;
+    transition: all var(--t-mid) var(--ease);
+  }
+  .value-card:hover {
+    border-color: var(--c-border-hover);
+    background: var(--c-surface-2);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+  .value-icon {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+    display: block;
+    filter: grayscale(0.2);
+  }
+  .value-card h4 {
+    font-family: var(--f-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--c-white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .value-card p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    line-height: 1.65;
+  }
 
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      width: 100%;
-      padding: 20px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(16px);
-      background: rgba(5,7,18,0.75);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: all 0.3s ease;
-    }
-    .navbar.scrolled {
-      padding: 14px 32px;
-      background: rgba(5,7,18,0.92);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.24);
-    }
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .testi-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 28px 24px;
+    transition: all var(--t-mid) var(--ease);
+    position: relative;
+  }
+  .testi-card:hover {
+    border-color: var(--c-border-hover);
+    box-shadow: var(--shadow-hover);
+  }
+  .testi-quote {
+    font-family: var(--f-serif);
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--c-blue-bright);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+  .testi-card blockquote {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .testi-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-blue), var(--c-blue-bright));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-white-90);
+    line-height: 1.3;
+  }
+  .testi-role {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--c-white-35);
+  }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .brand img {
-      height: 70px;
-      width: auto;
-      display: block;
-      transition: transform 0.28s ease, filter 0.28s ease;
-    }
-    .brand img:hover {
-      transform: scale(1.06);
-      filter: drop-shadow(0 12px 36px rgba(56,178,255,0.2));
-    }
-    .sr-only {
-      position: absolute !important;
-      height: 1px;
-      width: 1px;
-      overflow: hidden;
-      clip: rect(1px,1px,1px,1px);
-      white-space: nowrap;
-    }
+  /* CTA band */
+  .about-cta {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-xl);
+    padding: 64px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-cta::before {
+    content: '';
+    position: absolute;
+    top: -60%; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .about-cta h2 {
+    font-family: var(--f-serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 400;
+    color: var(--c-white);
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .about-cta p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .about-cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
 
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-      flex: 1;
-      justify-content: center;
-    }
-    .nav-links a {
-      color: var(--text-secondary);
-      font-size: 0.94rem;
-      font-weight: 600;
-      position: relative;
-      transition: color 0.28s ease;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%) scaleX(0);
-      bottom: -6px;
-      width: 64%;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue-2), var(--cyan));
-      transition: transform 0.28s ease;
-    }
-    .nav-links a:hover {
-      color: var(--text);
-    }
-    .nav-links a:hover::after {
-      transform: translateX(-50%) scaleX(1);
-    }
+  /* 2-col layout for about */
+  .about-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
 
-    .nav-cta {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-left: auto;
-    }
-    .btn {
-      padding: 11px 20px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.88rem;
-      transition: all 0.28s ease;
-    }
-    .btn-ghost {
-      background: rgba(255,255,255,0.04);
-      color: var(--text-secondary);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.08);
-      color: var(--text);
-      transform: translateY(-2px);
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue-3), var(--cyan), var(--teal));
-      color: var(--bg-dark);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(56,178,255,0.24);
-    }
+  /* Accounting visual accent */
+  .accounting-visual {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    position: relative;
+  }
+  .accounting-visual img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    opacity: 0.75;
+    transition: opacity var(--t-slow) var(--ease);
+  }
+  .accounting-visual:hover img { opacity: 0.9; }
+  .accounting-visual-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(6,13,31,0.95) 0%, transparent 100%);
+  }
+  .accounting-visual-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-blue-bright);
+    margin-bottom: 4px;
+  }
+  .accounting-visual-label {
+    font-family: var(--f-serif);
+    font-size: 1.1rem;
+    color: var(--c-white);
+    font-weight: 400;
+  }
 
-    @media (max-width: 900px) {
-      .nav-links { gap: 16px; font-size: 0.9rem; }
-      .brand img { height: 60px; }
-    }
-    @media (max-width: 640px) {
-      .navbar { padding: 14px 18px; }
-      .nav-links { display: none; }
-      .nav-cta { margin-left: 0; gap: 8px; }
-      .btn { padding: 10px 16px; font-size: 0.8rem; }
-      .brand img { height: 50px; }
-    }
+  @media (max-width: 900px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .about-two-col { grid-template-columns: 1fr; gap: 48px; }
+    .about-cta { padding: 48px 32px; }
+  }
+  @media (max-width: 600px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .about-stats { gap: 24px; }
+    .about-stat-divider { display: none; }
+  }
+</style>
 
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      padding: 140px 32px 100px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      top: -10%;
-      right: -15%;
-      background: radial-gradient(circle, rgba(56,178,255,0.18), transparent 50%);
-      filter: blur(80px);
-      pointer-events: none;
-    }
-
-    .hero-content h1 {
-      font-size: clamp(3.2rem, 7vw, 5.8rem);
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -0.06em;
-      margin: 0 0 24px 0;
-      max-width: 620px;
-    }
-    .hero-content h1 span {
-      background: linear-gradient(90deg, var(--blue-3), var(--cyan), var(--teal));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-content p {
-      font-size: 1.125rem;
-      line-height: 1.8;
-      color: var(--text-secondary);
-      max-width: 560px;
-      margin: 0 0 32px 0;
-    }
-
-    .hero-visual {
-      position: relative;
-      display: grid;
-      gap: 20px;
-      min-height: 500px;
-    }
-    .trust-card {
-      padding: 32px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
-      position: absolute;
-      animation: float 6s ease-in-out infinite;
-    }
-    .trust-card.card-1 { top: 10%; right: 0; animation-delay: 0s; width: 280px; }
-    .trust-card.card-2 { top: 50%; left: 0; animation-delay: 1s; width: 320px; }
-    .trust-card.card-3 { bottom: 10%; right: 20%; animation-delay: 2s; width: 260px; }
-
-    .trust-card .metric {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--cyan);
-      margin-bottom: 8px;
-    }
-    .trust-card .label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.02em;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-16px); }
-    }
-
-    .section {
-      padding: 120px 32px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-    .section.dark { background: rgba(255,255,255,0.01); }
-
-    .section-header {
-      margin-bottom: 64px;
-      max-width: 760px;
-    }
-    .section-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 16px;
-    }
-    .section-tag::before {
-      content: '';
-      width: 32px;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue-2), var(--cyan));
-    }
-    .section-header h2 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1.05;
-      letter-spacing: -0.05em;
-      margin: 0 0 20px 0;
-      font-weight: 800;
-    }
-    .section-header p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--text-secondary);
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      padding: 40px 0;
-    }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
-      align-items: start;
-      opacity: 0;
-      animation: revealUp 0.8s ease forwards;
-    }
-    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-    .timeline-item:nth-child(4) { animation-delay: 0.4s; }
-
-    @keyframes revealUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .timeline-year {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--cyan);
-    }
-    .timeline-content h3 {
-      font-size: 1.3rem;
-      margin: 0 0 8px 0;
-      font-weight: 700;
-    }
-    .timeline-content p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    /* Values Grid */
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    .value-card {
-      padding: 40px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      transition: all 0.28s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .value-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(56,178,255,0.1), rgba(6,182,212,0.05));
-      opacity: 0;
-      transition: opacity 0.28s ease;
-    }
-    .value-card:hover {
-      transform: translateY(-8px);
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(56,178,255,0.2);
-      box-shadow: 0 20px 60px rgba(56,178,255,0.1);
-    }
-    .value-card:hover::before {
-      opacity: 1;
-    }
-
-    .value-icon {
-      font-size: 2.4rem;
-      margin-bottom: 16px;
-    }
-    .value-card h3 {
-      font-size: 1.25rem;
-      margin: 0 0 12px 0;
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
-    }
-    .value-card p {
-      font-size: 0.98rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Testimonials */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-    .testimonial {
-      padding: 32px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      transition: all 0.28s ease;
-    }
-    .testimonial:hover {
-      background: rgba(255,255,255,0.06);
-      transform: translateY(-4px);
-    }
-
-    .quote {
-      font-size: 2rem;
-      color: var(--cyan);
-      opacity: 0.4;
-      margin-bottom: 12px;
-      line-height: 1;
-    }
-    .testimonial-text {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-    .testimonial-author {
-      display: grid;
-      gap: 4px;
-    }
-    .author-name {
-      font-weight: 700;
-      color: var(--text);
-    }
-    .author-title {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    /* CTA */
-    .cta-section {
-      padding: 80px 32px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      text-align: center;
-    }
-    .cta-section h2 {
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      line-height: 1.1;
-      margin: 0 0 24px 0;
-      font-weight: 800;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .cta-section p {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .footer {
-      padding: 48px 32px 32px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-    .footer a {
-      color: var(--text-muted);
-      transition: color 0.28s ease;
-    }
-    .footer a:hover {
-      color: var(--cyan);
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: 2rem; padding: 100px 20px 60px; }
-      .hero-visual { display: none; }
-      .section { padding: 80px 20px; }
-      .timeline-item { grid-template-columns: 80px 1fr; gap: 24px; }
-      .footer { flex-direction: column; align-items: flex-start; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="progress-shell"><span id="progress"></span></div>
-
-  <header class="navbar" role="banner">
-    <div class="brand">
-      <a href="/" style="display:inline-flex; align-items:center;">
-        <img src="/logo.png" alt="Kanbir Solutions" />
-        <span class="sr-only">Kanbir Solutions</span>
-      </a>
-    </div>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/services">Services</a>
-      <a href="/industries">Industries</a>
-      <a href="/insights">Insights</a>
-      <a href="/careers">Careers</a>
-    </nav>
-    <div class="nav-cta">
-      <button class="btn btn-ghost">Portal</button>
-      <button class="btn btn-primary" onclick="window.location.href='/contact#consultation-form'">Book Strategy Call</button>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Building <span>financial confidence</span> for ambitious businesses.</h1>
-        <p>We combine ERP integration, strategic accounting, and financial intelligence to help growth-focused companies move faster, optimize tax, and scale sustainably.</p>
+<!-- ══ PAGE HEADER ══ -->
+<div class="kb-page-header">
+  <div class="kb-page-header-inner">
+    <div class="kb-page-eyebrow">Who We Are</div>
+    <h1 class="kb-page-title">
+      Building financial confidence<br />
+      for <strong>ambitious businesses.</strong>
+    </h1>
+    <p class="kb-page-lead">
+      We're more than service providers — we're committed partners dedicated to driving your business's success through financial intelligence, operational precision, and long-term relationship thinking.
+    </p>
+    <div class="about-stats">
+      <div>
+        <div class="about-stat-num">500+</div>
+        <div class="about-stat-label">Clients Supported</div>
       </div>
-      <div class="hero-visual">
-        <div class="trust-card card-1">
-          <div class="metric">500+</div>
-          <div class="label">Clients Supported</div>
-        </div>
-        <div class="trust-card card-2">
-          <div class="metric">£40M+</div>
-          <div class="label">R&D Claims & Savings</div>
-        </div>
-        <div class="trust-card card-3">
-          <div class="metric">15+</div>
-          <div class="label">Years Experience</div>
+      <div class="about-stat-divider"></div>
+      <div>
+        <div class="about-stat-num">£40M+</div>
+        <div class="about-stat-label">R&D Claims & Savings</div>
+      </div>
+      <div class="about-stat-divider"></div>
+      <div>
+        <div class="about-stat-num">15+</div>
+        <div class="about-stat-label">Years Experience</div>
+      </div>
+      <div class="about-stat-divider"></div>
+      <div>
+        <div class="about-stat-num">98%</div>
+        <div class="about-stat-label">Client Retention</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="kb-divider"></div>
+
+<!-- ══ PILLARS ══ -->
+<section class="kb-section" style="background: var(--c-bg);">
+  <div class="kb-section-inner">
+    <div class="about-two-col" style="margin-bottom: 64px;">
+      <div>
+        <div class="kb-section-label">Our Philosophy</div>
+        <h2 class="kb-section-heading">
+          A holistic approach<br />to <em>growth.</em>
+        </h2>
+        <p class="kb-section-sub" style="margin-bottom: 28px;">
+          Success demands a blend of strategic planning and operational precision. We combine deep expertise in Accounting, ERP, Business Analysis, and IT to craft holistic, scalable solutions.
+        </p>
+        <a href="/services" class="kb-btn-outline" style="margin-top: 8px;">
+          Explore our services
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="accounting-visual kb-reveal">
+        <img
+          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+          alt="Financial strategy planning with charts and data"
+          loading="lazy"
+          width="900" height="675"
+        />
+        <div class="accounting-visual-overlay">
+          <div class="accounting-visual-tag">Strategic Finance</div>
+          <div class="accounting-visual-label">Planning for scale</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Timeline -->
-    <section class="section dark">
-      <div class="section-header">
-        <span class="section-tag">Our Journey</span>
-        <h2>How Kanbir evolved to serve modern finance.</h2>
+    <div class="pillars-grid">
+      <div class="pillar-card kb-reveal" data-delay="0">
+        <div class="pillar-num">01</div>
+        <h3>Your Trusted Business Partner</h3>
+        <p>Our team of seasoned experts collaborates closely with clients to ensure both financial and operational efficiency. By aligning with your goals, we help you tackle today's challenges while preparing for tomorrow's opportunities.</p>
+      </div>
+      <div class="pillar-card kb-reveal" data-delay="80">
+        <div class="pillar-num">02</div>
+        <h3>A Holistic Approach to Growth</h3>
+        <p>We combine deep expertise in Accounting, ERP, Business Analysis, and IT to craft holistic, scalable solutions — whether optimising processes, navigating regulatory complexities, or leveraging technology for growth.</p>
+      </div>
+      <div class="pillar-card kb-reveal" data-delay="160">
+        <div class="pillar-num">03</div>
+        <h3>Tailored Solutions for Every Stage</h3>
+        <p>From startups laying their foundations to enterprises exploring global markets, we provide bespoke services designed to meet unique business needs — adapting strategy to your scale, industry, and ambitions.</p>
+      </div>
+      <div class="pillar-card kb-reveal" data-delay="240">
+        <div class="pillar-num">04</div>
+        <h3>Innovation Meets Expertise</h3>
+        <p>We leverage cutting-edge technology, industry best practices, and decades of experience — integrating advanced ERP systems, streamlining financial management, and offering actionable business insights.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="kb-divider"></div>
+
+<!-- ══ JOURNEY ══ -->
+<section class="kb-section" style="background: var(--c-bg-2);">
+  <div class="kb-section-inner">
+    <div class="about-two-col">
+      <div>
+        <div class="kb-section-label">Our Journey</div>
+        <h2 class="kb-section-heading">
+          How Kanbir evolved<br />to serve <em>modern finance.</em>
+        </h2>
+        <p class="kb-section-sub">
+          Over 15 years, we've grown from a focused accounting practice into a premium financial intelligence and transformation partner.
+        </p>
       </div>
       <div class="timeline">
-        <div class="timeline-item">
+        <div class="timeline-item kb-reveal" data-delay="0">
+          <div class="timeline-dot"></div>
           <div class="timeline-year">2009</div>
-          <div class="timeline-content">
-            <h3>Founded</h3>
-            <p>Started with a simple mission: make accounting smarter for growth companies.</p>
-          </div>
+          <h4>Founded</h4>
+          <p>Started with a simple mission: make accounting smarter for growth companies.</p>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item kb-reveal" data-delay="100">
+          <div class="timeline-dot"></div>
           <div class="timeline-year">2013</div>
-          <div class="timeline-content">
-            <h3>ERP Expertise</h3>
-            <p>Expanded into ERP integration and systems optimization for scaling teams.</p>
-          </div>
+          <h4>ERP Expertise</h4>
+          <p>Expanded into ERP integration and systems optimisation for scaling teams — SAP, Oracle, Sage, QuickBooks.</p>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item kb-reveal" data-delay="200">
+          <div class="timeline-dot"></div>
           <div class="timeline-year">2018</div>
-          <div class="timeline-content">
-            <h3>R&D Leadership</h3>
-            <p>Became specialists in R&D tax credits, recovering £40M+ for innovative companies.</p>
-          </div>
+          <h4>R&D Leadership</h4>
+          <p>Became specialists in R&D tax credits, recovering £40M+ for innovative UK businesses.</p>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item kb-reveal" data-delay="300">
+          <div class="timeline-dot"></div>
           <div class="timeline-year">2024</div>
-          <div class="timeline-content">
-            <h3>Strategic Partnership</h3>
-            <p>Evolved into premium financial intelligence and transformation partner for ambitious leaders.</p>
-          </div>
+          <h4>Strategic Partnership</h4>
+          <p>Evolved into a premium financial intelligence and transformation partner for ambitious leaders nationwide.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- Values -->
-    <section class="section">
-      <div class="section-header">
-        <span class="section-tag">Our Values</span>
-        <h2>What guides everything we do.</h2>
-      </div>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon">🎯</div>
-          <h3>Clear Strategy</h3>
-          <p>No jargon, no confusion. We translate complex finance into actionable strategy.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">⚡</div>
-          <h3>Fast Execution</h3>
-          <p>Speed matters. Our teams move at the pace of ambitious businesses.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🔐</div>
-          <h3>Trust First</h3>
-          <p>Built on compliance, transparency, and long-term partnership thinking.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">📊</div>
-          <h3>Data-Driven</h3>
-          <p>Insights backed by data. Intelligence that informs every decision.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🌱</div>
-          <h3>Growth Minded</h3>
-          <p>We succeed when you scale. Growth is at the heart of our thinking.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🤝</div>
-          <h3>Partnership</h3>
-          <p>We're extension of your team, not a vendor. Deep, collaborative relationships.</p>
-        </div>
-      </div>
-    </section>
+<div class="kb-divider"></div>
 
-    <!-- Testimonials -->
-    <section class="section dark">
-      <div class="section-header">
-        <span class="section-tag">Client Voice</span>
-        <h2>How leaders describe working with Kanbir.</h2>
+<!-- ══ VALUES ══ -->
+<section class="kb-section" style="background: var(--c-bg);">
+  <div class="kb-section-inner">
+    <div style="text-align: center; max-width: 560px; margin: 0 auto 56px;">
+      <div class="kb-section-label" style="justify-content: center;">Our Values</div>
+      <h2 class="kb-section-heading">What guides <em>everything</em> we do.</h2>
+      <p class="kb-section-sub" style="margin: 0 auto;">
+        Our values aren't words on a wall. They shape how we hire, advise, and show up for our clients every day.
+      </p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card kb-reveal" data-delay="0">
+        <span class="value-icon" aria-hidden="true">🎯</span>
+        <h4>Clear Strategy</h4>
+        <p>No jargon, no confusion. We translate complex finance into actionable strategy your team can execute.</p>
       </div>
-      <div class="testimonials-grid">
-        <div class="testimonial">
-          <div class="quote">"</div>
-          <div class="testimonial-text">Kanbir transformed our financial operations. Within 6 months, we had visibility into cash flow, optimized our ERP, and recovered £280K in R&D claims.</div>
-          <div class="testimonial-author">
-            <div class="author-name">Sarah Chen</div>
-            <div class="author-title">CFO, TechScale</div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <div class="quote">"</div>
-          <div class="testimonial-text">Not just accountants. They're strategic partners who understand our growth trajectory and plan accordingly.</div>
-          <div class="testimonial-author">
-            <div class="author-name">James Murphy</div>
-            <div class="author-title">Founder, GrowthCo</div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <div class="quote">"</div>
-          <div class="testimonial-text">Finally, someone who speaks our language. They get ERP complexity and helped us avoid a £1.2M mistake in implementation.</div>
-          <div class="testimonial-author">
-            <div class="author-name">Priya Patel</div>
-            <div class="author-title">COO, ManufacturePro</div>
-          </div>
-        </div>
+      <div class="value-card kb-reveal" data-delay="80">
+        <span class="value-icon" aria-hidden="true">⚡</span>
+        <h4>Fast Execution</h4>
+        <p>Speed matters in business. Our teams move at the pace of ambitious, high-growth organisations.</p>
       </div>
-    </section>
+      <div class="value-card kb-reveal" data-delay="160">
+        <span class="value-icon" aria-hidden="true">🔐</span>
+        <h4>Trust First</h4>
+        <p>Built on compliance, transparency, and long-term partnership thinking that never cuts corners.</p>
+      </div>
+      <div class="value-card kb-reveal" data-delay="240">
+        <span class="value-icon" aria-hidden="true">📊</span>
+        <h4>Data-Driven</h4>
+        <p>Every insight is backed by data. Financial intelligence that informs every leadership decision.</p>
+      </div>
+      <div class="value-card kb-reveal" data-delay="320">
+        <span class="value-icon" aria-hidden="true">🌱</span>
+        <h4>Growth Minded</h4>
+        <p>We succeed when you scale. Growth is at the heart of every strategy, model, and recommendation.</p>
+      </div>
+      <div class="value-card kb-reveal" data-delay="400">
+        <span class="value-icon" aria-hidden="true">🤝</span>
+        <h4>Partnership</h4>
+        <p>We're an extension of your team, not a vendor. Deep, collaborative, long-term relationships.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- CTA -->
-    <section class="cta-section">
+<div class="kb-divider"></div>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="kb-section" style="background: var(--c-bg-2);">
+  <div class="kb-section-inner">
+    <div style="text-align: center; max-width: 560px; margin: 0 auto 48px;">
+      <div class="kb-section-label" style="justify-content: center;">Client Voice</div>
+      <h2 class="kb-section-heading">How leaders describe <em>working with Kanbir.</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card kb-reveal" data-delay="0">
+        <div class="testi-quote">"</div>
+        <blockquote>Kanbir transformed our financial operations. Within 6 months, we had visibility into cash flow, optimised our ERP, and recovered £280K in R&D claims.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">SC</div>
+          <div>
+            <div class="testi-name">Sarah Chen</div>
+            <div class="testi-role">CFO, TechScale</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card kb-reveal" data-delay="100">
+        <div class="testi-quote">"</div>
+        <blockquote>Not just accountants. They're strategic partners who understand our growth trajectory and plan accordingly with genuine care.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">JM</div>
+          <div>
+            <div class="testi-name">James Murphy</div>
+            <div class="testi-role">Founder, GrowthCo</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card kb-reveal" data-delay="200">
+        <div class="testi-quote">"</div>
+        <blockquote>Finally, someone who speaks our language. They get ERP complexity and helped us avoid a £1.2M mistake in implementation.</blockquote>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">PP</div>
+          <div>
+            <div class="testi-name">Priya Patel</div>
+            <div class="testi-role">COO, ManufacturePro</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="kb-divider"></div>
+
+<!-- ══ CTA ══ -->
+<section class="kb-section" style="background: var(--c-bg);">
+  <div class="kb-section-inner">
+    <div class="about-cta kb-reveal">
       <h2>Ready to build a smarter financial operating model?</h2>
-      <p>Let's explore how Kanbir can accelerate your growth, optimize your systems, and unlock financial intelligence.</p>
-      <div class="cta-buttons">
-        <button class="btn btn-primary" onclick="window.location.href='/contact#consultation-form'">Book Strategy Call</button>
-        <button class="btn btn-ghost" onclick="window.location.href='/services'">Explore Services</button>
+      <p>Let's explore how Kanbir can accelerate your growth, optimise your systems, and unlock financial intelligence that moves at your speed.</p>
+      <div class="about-cta-actions">
+        <a href="#" class="kb-btn-primary">
+          Book a Strategy Call
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/services" class="kb-btn-outline">Explore Services</a>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <footer class="footer">
-      <div>© 2026 Kanbir Solutions</div>
-      <div style="display:flex; gap:24px; flex-wrap:wrap;">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Cookies</a>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    // Progress bar
-    const progressBar = document.querySelector('.progress-shell span');
-    window.addEventListener('scroll', () => {
-      const height = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (window.scrollY / height) * 100;
-      progressBar.style.width = scrolled + '%';
-      
-      // Navbar scroll effect
-      const navbar = document.querySelector('.navbar');
-      navbar.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-  </script>
-</body>
-</html>
+</Layout>

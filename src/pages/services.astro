@@ -1,701 +1,681 @@
 ---
-// Services Page - Kanbir Solutions
+// src/pages/services.astro
+import Layout from "./layout.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Kanbir Solutions Services: accounting, tax, ERP integration, business advisory and R&D claims for ambitious businesses." />
-  <title>Services | Kanbir Solutions</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-  <style>
-    :root {
-      --bg: #f7fbff;
-      --surface: #ffffff;
-      --surface-soft: #f3f8ff;
-      --text: #10243b;
-      --muted: #5f718d;
-      --accent: #1f6eed;
-      --accent-light: #60a5fa;
-      --accent-soft: #dbeefe;
-      --border: rgba(31,110,237,0.12);
-      --shadow: 0 30px 70px rgba(31,110,237,0.12);
-      --radius: 28px;
-      --transition: all 0.25s ease;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(96,165,250,0.18), transparent 25%), radial-gradient(circle at bottom left, rgba(59,130,246,0.08), transparent 20%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      backdrop-filter: blur(24px);
-      background: rgba(255,255,255,0.88);
-      border-bottom: 1px solid rgba(31,110,237,0.1);
-      transition: var(--transition);
-    }
-
-    .navbar.sticky { background: rgba(255,255,255,0.98); padding: 10px 0; box-shadow: 0 10px 40px rgba(2,6,23,0.06); }
-
-    .nav-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 24px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .nav-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .nav-logo span {
-      display: inline-flex;
-      width: 36px;
-      height: 36px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      color: #fff;
-      box-shadow: 0 14px 35px rgba(31,110,237,0.18);
-    }
-
-    .nav-logo img { height:84px; width:auto; transition: transform 0.28s ease, filter 0.28s ease; }
-    .nav-logo img:hover { transform: scale(1.06); filter: drop-shadow(0 10px 30px rgba(31,110,237,0.12)); }
-    .nav-links a { position: relative; }
-    .nav-links a::after { content: ''; position: absolute; left:50%; transform: translateX(-50%) scaleX(0); bottom: -6px; width: 56%; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); transition: transform 0.28s ease; }
-    .nav-links a:hover::after { transform: translateX(-50%) scaleX(1); }
-    .sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-      flex: 1;
-    }
-
-    .nav-links a {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--muted);
-      padding: 12px 14px;
-      border-radius: 12px;
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-      background: rgba(96,165,250,0.12);
-    }
-
-    .nav-actions {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .btn {
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      font-weight: 700;
-      padding: 12px 24px;
-      transition: var(--transition);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      color: #fff;
-      box-shadow: 0 20px 45px rgba(31,110,237,0.18);
-    }
-
-    .btn-secondary {
-      background: rgba(31,110,237,0.06);
-      color: var(--accent);
-      border: 1px solid rgba(31,110,237,0.18);
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .hero {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 32px 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
-      gap: 48px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(96,165,250,0.12);
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 28px;
-    }
-
-    .eyebrow::before {
-      content: '✓';
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: rgba(31,110,237,0.16);
-      color: var(--accent);
-      font-size: 0.8rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(3.2rem, 5vw, 5.2rem);
-      line-height: 0.95;
-      max-width: 640px;
-      letter-spacing: -0.04em;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 strong {
-      color: var(--accent);
-    }
-
-    .hero p {
-      max-width: 620px;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 36px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .hero-card {
-      background: var(--surface);
-      padding: 22px;
-      border-radius: 24px;
-      border: 1px solid rgba(31,110,237,0.08);
-      box-shadow: 0 24px 50px rgba(31,110,237,0.1);
-    }
-
-    .hero-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .hero-card p {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .hero-visual {
-      display: grid;
-      gap: 22px;
-    }
-
-    .hero-visual > div {
-      border-radius: 32px;
-      overflow: hidden;
-      border: 1px solid rgba(31,110,237,0.08);
-      box-shadow: 0 26px 70px rgba(31,110,237,0.14);
-    }
-
-    .hero-visual img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-
-    .hero-visual .visual-panel {
-      padding: 28px;
-      background: linear-gradient(180deg, rgba(31,110,237,0.1), rgba(255,255,255,0.4));
-      backdrop-filter: blur(20px);
-    }
-
-    .hero-visual .visual-panel h3 {
-      font-size: 1.15rem;
-      margin-bottom: 12px;
-    }
-
-    .hero-visual .visual-panel p {
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .section {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 16px;
-      margin-bottom: 56px;
-    }
-
-    .section-head span {
-      display: inline-flex;
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-    }
-
-    .section-head h2 {
-      font-size: clamp(2.4rem, 4vw, 3.8rem);
-      line-height: 1.05;
-    }
-
-    .section-head p {
-      color: var(--muted);
-      max-width: 720px;
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
-      margin-bottom: 80px;
-    }
-
-    .service-card {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 32px;
-      border-radius: 32px;
-      background: var(--surface);
-      border: 1px solid rgba(31,110,237,0.08);
-      box-shadow: 0 30px 70px rgba(31,110,237,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 42px 90px rgba(31,110,237,0.16);
-    }
-
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      display: grid;
-      place-items: center;
-      border-radius: 18px;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      font-size: 1.2rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.25rem;
-      line-height: 1.3;
-      margin-bottom: 8px;
-    }
-
-    .service-card p {
-      color: var(--muted);
-      line-height: 1.75;
-      flex: 1;
-    }
-
-    .service-card .link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      margin-bottom: 88px;
-    }
-
-    .stat-card {
-      background: var(--surface-soft);
-      border: 1px solid rgba(31,110,237,0.1);
-      border-radius: 28px;
-      padding: 28px;
-      display: grid;
-      gap: 14px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
-    }
-
-    .stat-card h3 {
-      font-size: 2.4rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .stat-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .process {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      margin-bottom: 88px;
-    }
-
-    .process-step {
-      background: var(--surface);
-      border: 1px solid rgba(31,110,237,0.08);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 24px 55px rgba(31,110,237,0.08);
-      display: grid;
-      gap: 16px;
-    }
-
-    .process-step span {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: rgba(31,110,237,0.1);
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .process-step h3 {
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
-
-    .process-step p {
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.95rem;
-    }
-
-    .footer-cta {
-      background: linear-gradient(135deg, rgba(31,110,237,0.12), rgba(96,165,250,0.08));
-      border: 1px solid rgba(31,110,237,0.14);
-      border-radius: 32px;
-      padding: 52px 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .footer-cta h2 {
-      font-size: clamp(2rem, 3vw, 3.2rem);
-      line-height: 1.05;
-      margin-bottom: 12px;
-    }
-
-    .footer-cta p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-
-    .footer-cta .footer-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .mouse-follower,
-    .mouse-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-
-    .mouse-follower.active,
-    .mouse-glow.active { opacity: 1; }
-
-    .mouse-follower {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(31,110,237,0.95), rgba(96,165,250,0.85));
-      box-shadow: 0 0 30px rgba(31,110,237,0.35);
-      transform: translate(-50%, -50%);
-    }
-
-    .mouse-glow {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(31,110,237,0.16), transparent 55%);
-      transform: translate(-50%, -50%);
-    }
-
-    @media (max-width: 1080px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .process { grid-template-columns: 1fr 1fr; }
-      .footer-cta { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .nav-inner { flex-direction: column; align-items: flex-start; padding: 20px; }
-      .nav-links { justify-content: flex-start; }
-      .hero { padding: 80px 24px 40px; }
-      .section { padding: 0 24px; }
-      .services-grid, .stats-grid, .process { grid-template-columns: 1fr; }
-      .footer-cta { padding: 36px; }
-    }
-  </style>
-</head>
-
-<body>
-  <header class="navbar">
-    <div class="nav-inner">
-      <a class="nav-logo" href="/" style="display:inline-flex; align-items:center; gap:12px;">
-        <img src="/logo.png" alt="Kanbir Solutions" style="height:84px; width:auto; display:block;" />
-        <span class="sr-only">Kanbir Solutions</span>
-      </a>
-      <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/services">Services</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="btn btn-secondary">Client Portal</button>
-        <button class="btn btn-primary">Book a Call</button>
+<Layout
+  title="Services | Kanbir Solutions"
+  description="Kanbir Solutions Services: accounting, tax, ERP integration, business advisory and R&D claims for ambitious UK businesses."
+>
+
+<style>
+  /* ─── SERVICES PAGE STYLES ─── */
+
+  /* Hero feature cards row */
+  .services-hero-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 52px;
+  }
+  .hero-feat-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 20px;
+    transition: all var(--t-mid) var(--ease);
+  }
+  .hero-feat-card:hover {
+    border-color: var(--c-border-hover);
+    background: var(--c-surface-2);
+    transform: translateY(-2px);
+  }
+  .hero-feat-icon {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .hero-feat-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-white-90);
+    margin-bottom: 4px;
+  }
+  .hero-feat-desc {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--c-white-35);
+    line-height: 1.5;
+  }
+
+  /* Main services list */
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--c-border);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .service-row {
+    background: var(--c-surface);
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr auto;
+    gap: 40px;
+    align-items: start;
+    padding: 40px 44px;
+    transition: background var(--t-mid) var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .service-row::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--c-blue), var(--c-blue-bright));
+    opacity: 0;
+    transition: opacity var(--t-mid) var(--ease);
+  }
+  .service-row:hover { background: var(--c-surface-2); }
+  .service-row:hover::after { opacity: 1; }
+  .service-num {
+    font-family: var(--f-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: rgba(37,99,235,0.2);
+    line-height: 1;
+    padding-top: 4px;
+    letter-spacing: -0.04em;
+    transition: color var(--t-mid) var(--ease);
+  }
+  .service-row:hover .service-num { color: rgba(37,99,235,0.5); }
+  .service-main h3 {
+    font-family: var(--f-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--c-white);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .service-main p {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    line-height: 1.75;
+  }
+  .service-details {
+    padding-top: 4px;
+  }
+  .service-detail-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-blue-bright);
+    margin-bottom: 10px;
+  }
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .service-tag {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--c-white-60);
+    padding: 4px 10px;
+    background: var(--c-white-06);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-full);
+  }
+  .service-icon-large {
+    width: 52px; height: 52px;
+    border-radius: var(--r-md);
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: all var(--t-mid) var(--ease);
+  }
+  .service-row:hover .service-icon-large {
+    background: rgba(37,99,235,0.2);
+    border-color: rgba(37,99,235,0.4);
+  }
+
+  /* Accounting image visual */
+  .accounting-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .accounting-img-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    position: relative;
+  }
+  .accounting-img-card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+  }
+  .accounting-img-card:hover img { opacity: 0.9; transform: scale(1.03); }
+  .accounting-img-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 12px 16px;
+    background: linear-gradient(to top, rgba(6,13,31,0.9) 0%, transparent 100%);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--c-white-60);
+  }
+
+  /* Stats row */
+  .services-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--c-border);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .services-stat {
+    background: var(--c-surface);
+    padding: 36px 32px;
+    transition: background var(--t-mid) var(--ease);
+  }
+  .services-stat:hover { background: var(--c-surface-2); }
+  .services-stat-num {
+    font-family: var(--f-serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--c-white);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.03em;
+  }
+  .services-stat-label {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--c-white-35);
+    line-height: 1.4;
+  }
+
+  /* Process */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--c-border);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .process-step {
+    background: var(--c-surface);
+    padding: 36px 28px;
+    position: relative;
+    transition: background var(--t-mid) var(--ease);
+  }
+  .process-step:hover { background: var(--c-surface-2); }
+  .process-step-line {
+    position: absolute;
+    top: 47px; left: 64px; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(37,99,235,0.4), transparent);
+  }
+  .process-step:last-child .process-step-line { display: none; }
+  .process-step-num {
+    width: 36px; height: 36px;
+    border-radius: var(--r-sm);
+    background: rgba(37,99,235,0.12);
+    border: 1px solid rgba(37,99,235,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--c-blue-bright);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    transition: all var(--t-mid) var(--ease);
+  }
+  .process-step:hover .process-step-num {
+    background: var(--c-blue);
+    border-color: var(--c-blue);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+  }
+  .process-step h4 {
+    font-family: var(--f-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--c-white);
+    margin-bottom: 8px;
+  }
+  .process-step p {
+    font-size: 0.825rem;
+    font-weight: 300;
+    color: var(--c-white-60);
+    line-height: 1.65;
+  }
+
+  /* CTA */
+  .services-cta {
+    background: linear-gradient(135deg, var(--c-blue) 0%, #1d4ed8 40%, var(--c-bg-2) 100%);
+    border-radius: var(--r-xl);
+    padding: 72px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .services-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 50% -20%, rgba(255,255,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .services-cta h2 {
+    font-family: var(--f-serif);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    color: var(--c-white);
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .services-cta p {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    max-width: 500px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    position: relative;
+  }
+  .services-cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .btn-cta-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--f-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--c-blue);
+    background: var(--c-white);
+    padding: 13px 28px;
+    border-radius: var(--r-md);
+    border: none;
+    cursor: pointer;
+    transition: all var(--t-mid) var(--ease);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  .btn-cta-ghost-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--f-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    background: transparent;
+    padding: 12px 28px;
+    border-radius: var(--r-md);
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all var(--t-mid) var(--ease);
+  }
+  .btn-cta-ghost-white:hover { color: #fff; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+
+  /* Section with image+list split */
+  .services-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .services-split.reverse { direction: rtl; }
+  .services-split.reverse > * { direction: ltr; }
+
+  @media (max-width: 1024px) {
+    .service-row { grid-template-columns: 60px 1fr; gap: 24px; }
+    .service-details { display: none; }
+    .service-icon-large { display: none; }
+    .services-hero-cards { grid-template-columns: repeat(2, 1fr); }
+    .accounting-img-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 900px) {
+    .services-stats { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .services-split { grid-template-columns: 1fr; gap: 40px; }
+    .services-split.reverse { direction: ltr; }
+  }
+  @media (max-width: 600px) {
+    .services-hero-cards { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .services-cta { padding: 48px 24px; }
+    .service-row { padding: 28px 24px; }
+  }
+</style>
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="kb-page-header">
+  <div class="kb-page-header-inner">
+    <div class="kb-page-eyebrow">Our Services</div>
+    <h1 class="kb-page-title">
+      Strategy-led finance, bookkeeping<br />
+      and advisory <strong>built to grow your business.</strong>
+    </h1>
+    <p class="kb-page-lead">
+      Kanbir Solutions helps scaleups and high-growth firms simplify accounting, unlock tax savings, integrate ERP systems and claim R&D relief — with confidence and precision.
+    </p>
+    <div class="services-hero-cards" style="margin-top: 48px;">
+      <div class="hero-feat-card">
+        <span class="hero-feat-icon" aria-hidden="true">📘</span>
+        <div class="hero-feat-title">Accounting built for growth</div>
+        <div class="hero-feat-desc">Cloud-native bookkeeping and KPI dashboards that keep leaders aligned.</div>
+      </div>
+      <div class="hero-feat-card">
+        <span class="hero-feat-icon" aria-hidden="true">🧾</span>
+        <div class="hero-feat-title">Tax and compliance clarity</div>
+        <div class="hero-feat-desc">End-to-end tax planning and HMRC compliance with proactive advice.</div>
+      </div>
+      <div class="hero-feat-card">
+        <span class="hero-feat-icon" aria-hidden="true">⚙️</span>
+        <div class="hero-feat-title">ERP adoption without friction</div>
+        <div class="hero-feat-desc">Practical systems integration to unify sales, finance and operations.</div>
+      </div>
+      <div class="hero-feat-card">
+        <span class="hero-feat-icon" aria-hidden="true">📈</span>
+        <div class="hero-feat-title">Data-driven business advisory</div>
+        <div class="hero-feat-desc">Financial modelling and strategic guidance for your next stage of growth.</div>
       </div>
     </div>
-  </header>
+  </div>
+</div>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <span class="eyebrow">Trusted by ambitious businesses across the UK</span>
-        <h1>Strategy-led finance, bookkeeping and advisory services built to grow your business.</h1>
-        <p>Kanbir Solutions helps scaleups and high-growth firms simplify accounting, unlock tax savings, integrate ERP systems and claim R&D relief with confidence.</p>
-        <div class="hero-grid">
-          <div class="hero-card">
-            <h3>Accounting built for growth</h3>
-            <p>Cloud-native bookkeeping, management reporting and KPI dashboards that keep leaders aligned.</p>
+<div class="kb-divider"></div>
+
+<!-- ══ SERVICES LIST ══ -->
+<section class="kb-section" style="background: var(--c-bg);">
+  <div class="kb-section-inner">
+    <div style="margin-bottom: 40px;">
+      <div class="kb-section-label">What We Offer</div>
+      <h2 class="kb-section-heading">Services designed around <em>your business lifecycle.</em></h2>
+      <p class="kb-section-sub">From startup finance to international expansion, we combine expert accounting, tax, ERP and advisory services for every stage of your journey.</p>
+    </div>
+
+    <div class="services-list">
+
+      <div class="service-row kb-reveal">
+        <div class="service-num">01</div>
+        <div class="service-main">
+          <h3>ERP System Integration</h3>
+          <p>We specialise in seamlessly integrating ERP systems such as SAP, Oracle, Sage, and QuickBooks into your business processes. Our approach ensures automation of repetitive tasks, streamlining workflows, and enhancing operational efficiency. Whether implementing a new system or upgrading an existing one, our team ensures a smooth transition with minimal disruption.</p>
+        </div>
+        <div class="service-details">
+          <div class="service-detail-label">Platforms</div>
+          <div class="service-tags">
+            <span class="service-tag">SAP</span>
+            <span class="service-tag">Oracle</span>
+            <span class="service-tag">Sage</span>
+            <span class="service-tag">QuickBooks</span>
+            <span class="service-tag">Xero</span>
+            <span class="service-tag">Microsoft Dynamics</span>
           </div>
-          <div class="hero-card">
-            <h3>Tax and compliance clarity</h3>
-            <p>End-to-end tax planning, VAT support and HMRC compliance with proactive advice.</p>
+        </div>
+        <div class="service-icon-large" aria-hidden="true">⚙️</div>
+      </div>
+
+      <div class="service-row kb-reveal">
+        <div class="service-num">02</div>
+        <div class="service-main">
+          <h3>Business Advisory Services</h3>
+          <p>Navigating the complexities of business growth requires strategic insights, and our advisory services guide you every step of the way. From developing effective market entry strategies to supporting mergers and acquisitions, we provide actionable solutions tailored to your unique needs — combining in-depth industry knowledge with data-driven analysis to identify opportunities and mitigate risks.</p>
+        </div>
+        <div class="service-details">
+          <div class="service-detail-label">Focus Areas</div>
+          <div class="service-tags">
+            <span class="service-tag">Market Entry</span>
+            <span class="service-tag">M&A Support</span>
+            <span class="service-tag">Financial Modelling</span>
+            <span class="service-tag">Cash Flow Planning</span>
+            <span class="service-tag">KPI Strategy</span>
           </div>
-          <div class="hero-card">
-            <h3>ERP adoption without friction</h3>
-            <p>Practical systems integration to unify sales, finance and operations across your business.</p>
+        </div>
+        <div class="service-icon-large" aria-hidden="true">📈</div>
+      </div>
+
+      <div class="service-row kb-reveal">
+        <div class="service-num">03</div>
+        <div class="service-main">
+          <h3>Accounting & Bookkeeping</h3>
+          <p>Accurate financial records are the foundation of a healthy business. Our comprehensive bookkeeping solutions ensure your finances remain clean, organised, and compliant. We offer both onsite and remote services, handling everything from recording transactions to reconciling accounts — delivering timely, precise financial reports that give you a clear picture of your business's financial health.</p>
+        </div>
+        <div class="service-details">
+          <div class="service-detail-label">Includes</div>
+          <div class="service-tags">
+            <span class="service-tag">Real-time Ledgers</span>
+            <span class="service-tag">Month-end Close</span>
+            <span class="service-tag">Reconciliation</span>
+            <span class="service-tag">GAAP/IFRS</span>
+            <span class="service-tag">Management Reports</span>
           </div>
-          <div class="hero-card">
-            <h3>Data-driven business advisory</h3>
-            <p>Financial modelling, cash flow planning and strategic guidance for the next stage of growth.</p>
+        </div>
+        <div class="service-icon-large" aria-hidden="true">📘</div>
+      </div>
+
+      <div class="service-row kb-reveal">
+        <div class="service-num">04</div>
+        <div class="service-main">
+          <h3>Compliance & Taxation Support</h3>
+          <p>Managing tax obligations and ensuring compliance can be challenging, but our expert services make the process simple and stress-free. We assist with tax returns, VAT submissions, audits, and other regulatory requirements — ensuring you stay fully compliant with local and international laws. Our proactive approach identifies potential issues early and minimises the risk of penalties.</p>
+        </div>
+        <div class="service-details">
+          <div class="service-detail-label">Coverage</div>
+          <div class="service-tags">
+            <span class="service-tag">Corporate Tax</span>
+            <span class="service-tag">VAT Returns</span>
+            <span class="service-tag">HMRC Compliance</span>
+            <span class="service-tag">Payroll Tax</span>
+            <span class="service-tag">International Tax</span>
           </div>
         </div>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;">
-          <button class="btn btn-primary">See Our Services</button>
-          <button class="btn btn-secondary">Request a Proposal</button>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div>
-          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Finance team planning" />
-        </div>
-        <div class="visual-panel">
-          <h3>Fast-moving teams choose Kanbir</h3>
-          <p>We support ambitious founders with precise financial planning, tax optimisation and systems that keep growth sustainable.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <span>What we do</span>
-        <h2>Services designed around your business lifecycle</h2>
-        <p>From startup finance to international expansion, we combine expert accounting, tax, ERP and advisory services for every stage of your journey.</p>
-      </div>
-      <div class="services-grid">
-        <article class="service-card">
-          <div class="service-icon">📘</div>
-          <h3>Accounting & bookkeeping</h3>
-          <p>Real-time ledger management, cashflow reporting and month-end close that keeps your numbers accurate and understandable.</p>
-          <a class="link" href="#">Learn more</a>
-        </article>
-        <article class="service-card">
-          <div class="service-icon">🧾</div>
-          <h3>Tax planning & compliance</h3>
-          <p>Corporate tax, VAT, payroll and R&D claims support to turn compliance into a growth asset.</p>
-          <a class="link" href="#">Learn more</a>
-        </article>
-        <article class="service-card">
-          <div class="service-icon">⚙️</div>
-          <h3>ERP integration</h3>
-          <p>Systems implementation that removes manual work and gives finance leaders a single source of truth.</p>
-          <a class="link" href="#">Learn more</a>
-        </article>
-        <article class="service-card">
-          <div class="service-icon">📈</div>
-          <h3>Business advisory</h3>
-          <p>Operational planning, margin improvement and growth modelling to help you make smarter decisions.</p>
-          <a class="link" href="#">Learn more</a>
-        </article>
-        <article class="service-card">
-          <div class="service-icon">🔬</div>
-          <h3>R&D claims</h3>
-          <p>Claims preparation and tax relief strategy for innovative businesses investing in product development.</p>
-          <a class="link" href="#">Learn more</a>
-        </article>
-        <article class="service-card">
-          <div class="service-icon">🌍</div>
-          <h3>International finance</h3>
-          <p>Multi-jurisdictional support for UK companies operating overseas and overseas businesses entering the UK market.</p>
-          <a class="link" href="#">Learn more</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" style="padding-bottom: 120px;">
-      <div class="section-head">
-        <span>Why Kanbir</span>
-        <h2>Focus on growth, not process</h2>
-        <p>We bring the clarity, structure and systems that let leadership focus on customers while finance runs smoothly behind the scenes.</p>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h3>500+</h3>
-          <p>Businesses supported across manufacturing, tech, retail and professional services.</p>
-        </div>
-        <div class="stat-card">
-          <h3>15+</h3>
-          <p>Years of combined experience in UK accounting, taxation and ERP transformation.</p>
-        </div>
-        <div class="stat-card">
-          <h3>£18m+</h3>
-          <p>R&D tax relief recovered for clients across ambitious scaleups and established enterprises.</p>
-        </div>
-        <div class="stat-card">
-          <h3>24/7</h3>
-          <p>Support through fast-moving financial deadlines and growth cycles, backed by responsive advisory teams.</p>
-        </div>
+        <div class="service-icon-large" aria-hidden="true">🧾</div>
       </div>
 
-      <div class="process">
-        <article class="process-step">
-          <span>1</span>
-          <h3>Discovery</h3>
-          <p>We map your existing finance, tax and systems landscape to identify what matters most.</p>
-        </article>
-        <article class="process-step">
-          <span>2</span>
-          <h3>Blueprint</h3>
-          <p>We create a tailored plan combining accounting, compliance, ERP and advisory workstreams.</p>
-        </article>
-        <article class="process-step">
-          <span>3</span>
-          <h3>Implementation</h3>
-          <p>We execute with minimal disruption, integrating systems and strengthening your finance operations.</p>
-        </article>
-        <article class="process-step">
-          <span>4</span>
-          <h3>Growth support</h3>
-          <p>We stay close with monthly reports, tax planning cycles and strategic advisory sessions.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="footer-cta">
-        <div>
-          <h2>Ready to get financial clarity for your business?</h2>
-          <p>Start with a free consultation and see how Kanbir Solutions can simplify accounting, reduce tax risk, and support growth.</p>
+      <div class="service-row kb-reveal">
+        <div class="service-num">05</div>
+        <div class="service-main">
+          <h3>R&D Claims Support</h3>
+          <p>Research and development activities can unlock significant tax benefits, and we are here to help you maximise your R&D tax credits. Our team identifies eligible projects and expenses, ensuring no opportunity is overlooked. We manage the claims process from start to finish — including documentation, submissions, and liaising with tax authorities — so you can focus on innovation.</p>
         </div>
-        <div class="footer-buttons">
-          <button class="btn btn-primary">Book a consultation</button>
-          <button class="btn btn-secondary">Download service brief</button>
+        <div class="service-details">
+          <div class="service-detail-label">Track Record</div>
+          <div class="service-tags">
+            <span class="service-tag">£40M+ Recovered</span>
+            <span class="service-tag">Audit-ready Docs</span>
+            <span class="service-tag">HMRC Liaison</span>
+            <span class="service-tag">SME & RDEC</span>
+          </div>
+        </div>
+        <div class="service-icon-large" aria-hidden="true">🔬</div>
+      </div>
+
+      <div class="service-row kb-reveal">
+        <div class="service-num">06</div>
+        <div class="service-main">
+          <h3>International Finance</h3>
+          <p>Multi-jurisdictional support for UK companies operating overseas and overseas businesses entering the UK market. We provide cross-border tax planning, transfer pricing advice, entity structuring, and financial reporting that meets the requirements of every territory you operate in.</p>
+        </div>
+        <div class="service-details">
+          <div class="service-detail-label">Scope</div>
+          <div class="service-tags">
+            <span class="service-tag">Cross-border Tax</span>
+            <span class="service-tag">Transfer Pricing</span>
+            <span class="service-tag">Entity Structure</span>
+            <span class="service-tag">UK Market Entry</span>
+          </div>
+        </div>
+        <div class="service-icon-large" aria-hidden="true">🌍</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="kb-divider"></div>
+
+<!-- ══ STATS ══ -->
+<section class="kb-section" style="background: var(--c-bg-2);">
+  <div class="kb-section-inner">
+    <div style="text-align: center; margin-bottom: 48px;">
+      <div class="kb-section-label" style="justify-content: center;">Why Kanbir</div>
+      <h2 class="kb-section-heading" style="text-align: center;">Focus on growth, <em>not process.</em></h2>
+      <p class="kb-section-sub" style="margin: 0 auto; text-align: center;">We bring the clarity, structure and systems that let leadership focus on customers while finance runs smoothly behind the scenes.</p>
+    </div>
+    <div class="services-stats">
+      <div class="services-stat kb-reveal" data-delay="0">
+        <div class="services-stat-num">500+</div>
+        <div class="services-stat-label">Businesses supported across manufacturing, tech, retail and professional services</div>
+      </div>
+      <div class="services-stat kb-reveal" data-delay="80">
+        <div class="services-stat-num">15+</div>
+        <div class="services-stat-label">Years of combined experience in UK accounting, taxation and ERP transformation</div>
+      </div>
+      <div class="services-stat kb-reveal" data-delay="160">
+        <div class="services-stat-num">£40M+</div>
+        <div class="services-stat-label">R&D tax relief recovered for clients across ambitious scaleups and enterprises</div>
+      </div>
+      <div class="services-stat kb-reveal" data-delay="240">
+        <div class="services-stat-num">24/7</div>
+        <div class="services-stat-label">Support through fast-moving financial deadlines and growth cycles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="kb-divider"></div>
+
+<!-- ══ ACCOUNTING IMAGE GALLERY ══ -->
+<section class="kb-section" style="background: var(--c-bg);">
+  <div class="kb-section-inner">
+    <div class="services-split">
+      <div>
+        <div class="kb-section-label">Precision at Work</div>
+        <h2 class="kb-section-heading">Financial operations that <em>run flawlessly.</em></h2>
+        <p class="kb-section-sub" style="margin-bottom: 28px;">
+          Our team embeds itself into your financial workflows — from real-time bookkeeping to board-level reporting — ensuring every number is accurate, every deadline is met, and every opportunity is captured.
+        </p>
+        <a href="/contact" class="kb-btn-primary">
+          Talk to an expert
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="accounting-img-grid kb-reveal">
+        <div class="accounting-img-card">
+          <img
+            src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=80"
+            alt="Accountant reviewing financial statements and ledgers"
+            loading="lazy" width="700" height="525"
+          />
+          <div class="accounting-img-caption">Tax Planning</div>
+        </div>
+        <div class="accounting-img-card">
+          <img
+            src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=80"
+            alt="ERP dashboard showing financial KPIs"
+            loading="lazy" width="700" height="525"
+          />
+          <div class="accounting-img-caption">ERP Intelligence</div>
+        </div>
+        <div class="accounting-img-card">
+          <img
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80"
+            alt="Business advisory meeting with financial charts"
+            loading="lazy" width="700" height="525"
+          />
+          <div class="accounting-img-caption">Business Advisory</div>
+        </div>
+        <div class="accounting-img-card">
+          <img
+            src="https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=700&q=80"
+            alt="R&D financial documents and research planning"
+            loading="lazy" width="700" height="525"
+          />
+          <div class="accounting-img-caption">R&D Claims</div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
+</section>
 
-  <div class="mouse-follower"></div>
-  <div class="mouse-glow"></div>
+<div class="kb-divider"></div>
 
-  <script>
-    const follower = document.querySelector('.mouse-follower');
-    const glow = document.querySelector('.mouse-glow');
-    document.addEventListener('mousemove', e => {
-      follower.classList.add('active');
-      glow.classList.add('active');
-      follower.style.left = e.clientX + 'px';
-      follower.style.top = e.clientY + 'px';
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    });
-    document.addEventListener('mouseleave', () => {
-      follower.classList.remove('active');
-      glow.classList.remove('active');
-    });
-    const nav = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('sticky', window.scrollY > 20);
-    });
-  </script>
-</body>
-</html>
+<!-- ══ PROCESS ══ -->
+<section class="kb-section" style="background: var(--c-bg-2);">
+  <div class="kb-section-inner">
+    <div style="text-align: center; margin-bottom: 48px;">
+      <div class="kb-section-label" style="justify-content: center;">How We Work</div>
+      <h2 class="kb-section-heading" style="text-align: center;">A clear, <em>collaborative</em> process.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step kb-reveal" data-delay="0">
+        <div class="process-step-line" aria-hidden="true"></div>
+        <div class="process-step-num">1</div>
+        <h4>Discovery</h4>
+        <p>We map your existing finance, tax and systems landscape to identify what matters most and where opportunity lies.</p>
+      </div>
+      <div class="process-step kb-reveal" data-delay="100">
+        <div class="process-step-line" aria-hidden="true"></div>
+        <div class="process-step-num">2</div>
+        <h4>Blueprint</h4>
+        <p>We create a tailored plan combining accounting, compliance, ERP and advisory workstreams with clear deliverables.</p>
+      </div>
+      <div class="process-step kb-reveal" data-delay="200">
+        <div class="process-step-line" aria-hidden="true"></div>
+        <div class="process-step-num">3</div>
+        <h4>Implementation</h4>
+        <p>We execute with minimal disruption, integrating systems and strengthening your finance operations from day one.</p>
+      </div>
+      <div class="process-step kb-reveal" data-delay="300">
+        <div class="process-step-num">4</div>
+        <h4>Growth Support</h4>
+        <p>We stay close with monthly reports, tax planning cycles and strategic advisory sessions to keep momentum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="kb-divider"></div>
+
+<!-- ══ CTA ══ -->
+<section class="kb-section" style="background: var(--c-bg);">
+  <div class="kb-section-inner">
+    <div class="services-cta kb-reveal">
+      <h2>Ready to get financial clarity for your business?</h2>
+      <p>Start with a free consultation and see how Kanbir Solutions can simplify accounting, reduce tax risk, and support your growth trajectory.</p>
+      <div class="services-cta-actions">
+        <a href="#" class="btn-cta-white">
+          Book a consultation
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#" class="btn-cta-ghost-white">Download service brief</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>
